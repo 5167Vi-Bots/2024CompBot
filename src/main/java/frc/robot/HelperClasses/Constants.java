@@ -14,7 +14,10 @@ public class Constants {
     }
 
     public static class BottomIntakeSubsystemConstants {
-
+        public static final int BottomIntakeMotor1ID = 2;
+        public static final String BottomIntakeMotor1Can = RioCanBus;
+        public static final int BottomIntakeMotor2ID = 3;
+        public static final String BottomIntakeMotor2Can = RioCanBus;
     }
 
     public static class DriveSubsystemConstants {
@@ -30,7 +33,10 @@ public class Constants {
     }
 
     public static class TopIntakeSubsystemConstants {
-
+            public static final int TopIntakeMotor1ID = 4;
+            public static final String TopIntakeMotor1Can = RioCanBus;
+            public static final int TopIntakeMotor2ID = 5;
+            public static final String TopIntakeMotor2Can = RioCanBus;
     }
 
 }

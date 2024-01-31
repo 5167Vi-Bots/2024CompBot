@@ -2,14 +2,24 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
+// devyn
 package frc.robot.subsystems;
+
+import com.ctre.phoenix6.hardware.TalonFX;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.HelperClasses.Constants.TopIntakeSubsystemConstants;
+
 
 public class TopIntakeSubsystem extends SubsystemBase {
-  /** Creates a new ExampleSubsystem. */
-  public TopIntakeSubsystem() {}
+
+  private TalonFX topIntake1, topIntake2;
+
+  public TopIntakeSubsystem() {
+    topIntake1 = new TalonFX(TopIntakeSubsystemConstants.TopIntakeMotor1ID, TopIntakeSubsystemConstants.TopIntakeMotor1Can);
+    topIntake2 = new TalonFX(TopIntakeSubsystemConstants.TopIntakeMotor2ID, TopIntakeSubsystemConstants.TopIntakeMotor2Can);
+  }
 
   /**
    * Example command factory method.
@@ -25,7 +35,17 @@ public class TopIntakeSubsystem extends SubsystemBase {
         });
   }
 
+    public void IntakeUp() {
+      topIntake1.set(.8);
+      topIntake2.set(.8);
+    }
+
+    public void IntakeDown() {
+      topIntake1.set(.5);
+      topIntake2.set(.5);
+    }
   /**
+   * 
    * An example method querying a boolean state of the subsystem (for example, a digital sensor).
    *
    * @return value of some boolean subsystem state, such as a digital sensor.
