@@ -5,12 +5,13 @@
 // devyn
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix6.hardware.TalonFX;
+import com.ctre.phoenix6.signals.NeutralModeValue;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.HelperClasses.Constants.TopIntakeSubsystemConstants;
-
 
 public class TopIntakeSubsystem extends SubsystemBase {
 
@@ -19,6 +20,8 @@ public class TopIntakeSubsystem extends SubsystemBase {
   public TopIntakeSubsystem() {
     topIntake1 = new TalonFX(TopIntakeSubsystemConstants.TopIntakeMotor1ID, TopIntakeSubsystemConstants.TopIntakeMotor1Can);
     topIntake2 = new TalonFX(TopIntakeSubsystemConstants.TopIntakeMotor2ID, TopIntakeSubsystemConstants.TopIntakeMotor2Can);
+    topIntake1.setNeutralMode(NeutralModeValue.Brake);
+    topIntake2.setNeutralMode(NeutralModeValue.Brake);
   }
 
   /**
@@ -44,6 +47,11 @@ public class TopIntakeSubsystem extends SubsystemBase {
       topIntake1.set(.5);
       topIntake2.set(.5);
     }
+
+    public void IntakeStop(){
+      topIntake1.set(0);
+      topIntake2.set(0);
+    }
   /**
    * 
    * An example method querying a boolean state of the subsystem (for example, a digital sensor).
@@ -57,7 +65,13 @@ public class TopIntakeSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
+
+
     // This method will be called once per scheduler run
+  }
+
+  public void setSpeed(double speed){
+  
   }
 
   @Override

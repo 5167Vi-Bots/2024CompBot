@@ -5,13 +5,16 @@
 package frc.robot.commands;
 
 import frc.robot.subsystems.TopIntakeSubsystem;
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
 import edu.wpi.first.wpilibj2.command.Command;
 
 /** An example command that uses an example subsystem. */
 public class TopIntakeUp extends Command {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final TopIntakeSubsystem m_subsystem;
-
+   private TopIntakeUp topIntakeUp;
+  private Timer timer;
   /**
    * Creates a new ExampleCommand.
    *
@@ -20,7 +23,7 @@ public class TopIntakeUp extends Command {
    */
   public TopIntakeUp(TopIntakeSubsystem subsystem) {
     m_subsystem = subsystem;
-    
+    timer = new Timer();
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
   }
@@ -34,7 +37,6 @@ public class TopIntakeUp extends Command {
   public void execute() {
     m_subsystem.IntakeUp();
   }
-
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {}
