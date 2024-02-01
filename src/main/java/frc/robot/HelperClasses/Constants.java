@@ -14,9 +14,9 @@ public class Constants {
     }
 
     public static class BottomIntakeSubsystemConstants {
-        public static final int BottomIntakeMotor1ID = 2;
+        public static final int BottomIntakeMotor1ID = 1;
         public static final String BottomIntakeMotor1Can = RioCanBus;
-        public static final int BottomIntakeMotor2ID = 3;
+        public static final int BottomIntakeMotor2ID = 2;
         public static final String BottomIntakeMotor2Can = RioCanBus;
     }
 
@@ -29,13 +29,20 @@ public class Constants {
     }
 
     public static class ShooterSubsystemConstants {
-
+        public static final int ShooterIntakeMotor1ID = 5;
+        public static final String ShooterIntakeMotor1Can = RioCanBus;
+        public static final int ShooterIntakeMotor2ID = 6;
+        public static final String ShooterIntakeMotor2Can = RioCanBus;
+        public static final int ShooterMotor1ID = 7;
+        public static final String ShooterMotor1CAN = RioCanBus;
+        public static final int ShooterMotor2ID = 8;
+        public static final String ShooterMotor2CAN = RioCanBus;
     }
 
     public static class TopIntakeSubsystemConstants {
-            public static final int TopIntakeMotor1ID = 4;
+            public static final int TopIntakeMotor1ID = 3;
             public static final String TopIntakeMotor1Can = RioCanBus;
-            public static final int TopIntakeMotor2ID = 5;
+            public static final int TopIntakeMotor2ID = 4;
             public static final String TopIntakeMotor2Can = RioCanBus;
     }
 
