@@ -26,6 +26,8 @@ public class Constants {
 
     public static class LightsSubsystemConstants {
         public static final Color Orange = new Color(255, 50, 0);
+        public static final int CandleLightID = 15;
+        public static final String CandleLightCan = RioCanBus;
     }
 
     public static class ShooterSubsystemConstants {
