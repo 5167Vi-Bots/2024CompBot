@@ -1,5 +1,8 @@
 package frc.robot.HelperClasses;
 
+import com.ctre.phoenix6.mechanisms.swerve.SwerveModuleConstants;
+
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.util.Color;
 
 public class Constants {
@@ -21,7 +24,55 @@ public class Constants {
     }
 
     public static class DriveSubsystemConstants {
+        //everybody's heard
+        //about the bird
+        public static final int PigeonID = 0;
+        public static final String PigeonCan = CanivoreCanBus;
 
+        // !! COPIED FROM BASEFALCONSWERVE !!
+
+        /* Module Specific Constants */
+        /* Front Left Module - Module 0 */
+        public static final class Mod0 { //TODO: This must be tuned to specific robot
+            public static final int driveMotorID = 6;
+            public static final int angleMotorID = 5;
+            public static final int canCoderID = 4;
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(356.92);
+            /*public static final SwerveModuleConstants constants =                                 This is found in java/frc.lib.util.SwerveModuleConstants.java on the Base
+                new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);     Falcon Swerve, I'm  not adding it right now because I don't feel like it*/
+        }
+
+        /* Front Right Module - Module 1 */
+        public static final class Mod1 { //TODO: This must be tuned to specific robot
+            public static final int driveMotorID = 8;
+            public static final int angleMotorID = 7;
+            public static final int canCoderID = 1;
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(19.86);
+            /*public static final SwerveModuleConstants constants = 
+                new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);*/
+        }
+        
+        /* Back Left Module - Module 2 */
+        public static final class Mod2 { //TODO: This must be tuned to specific robot
+            public static final int driveMotorID = 4;
+            public static final int angleMotorID = 3;
+            public static final int canCoderID = 3;
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(88.85);
+            /*public static final SwerveModuleConstants constants = 
+                new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);*/
+        }
+
+        /* Back Right Module - Module 3 */
+        public static final class Mod3 { //TODO: This must be tuned to specific robot
+            public static final int driveMotorID = 2;
+            public static final int angleMotorID = 1;
+            public static final int canCoderID = 2;
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(158.20);
+            /*public static final SwerveModuleConstants constants = 
+                new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);*/
+        }
+
+        // !! END COPY !!
     }
 
     public static class LightsSubsystemConstants {
