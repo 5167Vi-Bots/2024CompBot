@@ -3,13 +3,49 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.subsystems;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix6.hardware.TalonFX;
+import com.ctre.phoenix6.signals.NeutralModeValue;
+
 //Erin
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.HelperClasses.Constants.ArmsSubsystemConstants;
+import frc.robot.HelperClasses.Constants.TopIntakeSubsystemConstants;
 
-public class ArmsSubsystem extends SubsystemBase {
+public class ArmsSubsystem extends SubsystemBase { 
+  private TalonFX rightArm, leftArm;
   /** Creates a new ExampleSubsystem. */
-  public ArmsSubsystem() {}
+  public ArmsSubsystem() {
+rightArm = new TalonFX(ArmsSubsystemConstants.RightArmMotorID, ArmsSubsystemConstants.RightArmMotorCan);
+leftArm = new TalonFX(ArmsSubsystemConstants.LeftArmMotorID, ArmsSubsystemConstants.LeftArmMotorCan);  
+rightArm.setNeutralMode(NeutralModeValue.Brake);
+leftArm.setNeutralMode(NeutralModeValue.Brake);
+}
+
+public void LeftArmStop(){
+   leftArm.set(0);
+  }
+
+  public void RightArmStop(){
+    rightArm.set(0);
+  }
+
+  public void RightArmUp(){
+    rightArm.set(.5);
+  }
+  
+  public void RightArmDown(){
+    rightArm.set(-0.5);
+  }
+  
+  public void LeftArmUp(){
+    leftArm.set(.5);
+  }
+
+  public void LeftArmDown(){
+    leftArm.set(-.5);
+  }
 
   /**
    * Example command factory method.

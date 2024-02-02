@@ -14,6 +14,11 @@ public class Constants {
 
     public static class ArmsSubsystemConstants {
 
+        public static final int LeftArmMotorID = 9;
+        public static final String LeftArmMotorCan = RioCanBus;
+        public static int RightArmMotorID = 10;
+        public static String RightArmMotorCan = RioCanBus;
+
     }
 
     public static class BottomIntakeSubsystemConstants {
