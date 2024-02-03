@@ -86,6 +86,11 @@ public class Constants {
         public static final String CandleLightCan = RioCanBus;
     }
 
+    public static class AmpSubsystemConstants {
+        public static final int ampMotorID = 16;
+        public static final String ampMotorCan = RioCanBus;
+    }
+
     public static class ShooterSubsystemConstants {
         public static final int ShooterIntakeMotor1ID = 5;
         public static final String ShooterIntakeMotor1Can = RioCanBus;
