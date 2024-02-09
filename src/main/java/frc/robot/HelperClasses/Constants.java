@@ -1,6 +1,17 @@
 package frc.robot.HelperClasses;
 
+import com.ctre.phoenix6.configs.Slot0Configs;
+import com.ctre.phoenix6.mechanisms.swerve.SwerveDrivetrainConstants;
 import com.ctre.phoenix6.mechanisms.swerve.SwerveModuleConstants;
+import com.ctre.phoenix6.mechanisms.swerve.SwerveModuleConstantsFactory;
+import com.ctre.phoenix6.mechanisms.swerve.SwerveModule.ClosedLoopOutputType;
+import com.ctre.phoenix6.mechanisms.swerve.SwerveModuleConstants.SteerFeedbackType;
+
+import edu.wpi.first.math.util.Units;
+//import frc.robot.CommandSwerveDrivetrain;
+
+import com.ctre.phoenix6.mechanisms.swerve.SwerveModuleConstants;
+import com.revrobotics.Rev2mDistanceSensor.Port;
 
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.util.Color;
@@ -34,6 +45,14 @@ public class Constants {
         public static final int PigeonID = 0;
         public static final String PigeonCan = CanivoreCanBus;
 
+
+
+
+
+
+
+
+
         // !! COPIED FROM BASEFALCONSWERVE !!
 
         /* Module Specific Constants */
@@ -43,8 +62,7 @@ public class Constants {
             public static final int angleMotorID = 5;
             public static final int canCoderID = 4;
             public static final Rotation2d angleOffset = Rotation2d.fromDegrees(356.92);
-            /*public static final SwerveModuleConstants constants =                                 This is found in java/frc.lib.util.SwerveModuleConstants.java on the Base
-                new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);     Falcon Swerve, I'm  not adding it right now because I don't feel like it*/
+            //public static final SwerveModuleConstants constants = new SwerveModuleConstants (driveMotorID, angleMotorID, canCoderID, angleOffset);     
         }
 
         /* Front Right Module - Module 1 */
@@ -53,8 +71,7 @@ public class Constants {
             public static final int angleMotorID = 7;
             public static final int canCoderID = 1;
             public static final Rotation2d angleOffset = Rotation2d.fromDegrees(19.86);
-            /*public static final SwerveModuleConstants constants = 
-                new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);*/
+            //public static final SwerveModuleConstants constants = new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }
         
         /* Back Left Module - Module 2 */
@@ -63,8 +80,7 @@ public class Constants {
             public static final int angleMotorID = 3;
             public static final int canCoderID = 3;
             public static final Rotation2d angleOffset = Rotation2d.fromDegrees(88.85);
-            /*public static final SwerveModuleConstants constants = 
-                new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);*/
+            //public static final SwerveModuleConstants constants = new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }
 
         /* Back Right Module - Module 3 */
@@ -73,8 +89,7 @@ public class Constants {
             public static final int angleMotorID = 1;
             public static final int canCoderID = 2;
             public static final Rotation2d angleOffset = Rotation2d.fromDegrees(158.20);
-            /*public static final SwerveModuleConstants constants = 
-                new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);*/
+            //public static final SwerveModuleConstants constants = new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }
 
         // !! END COPY !!
@@ -107,6 +122,11 @@ public class Constants {
             public static final String TopIntakeMotor1Can = RioCanBus;
             public static final int TopIntakeMotor2ID = 4;
             public static final String TopIntakeMotor2Can = RioCanBus;
+            public static final Port distanceSensorPort = Port.kOnboard;
     }
 
+    public static class ControllerPorts {
+        public static final int kDriverControllerPort = 17;
+        public static final int kOperatorControllerPort = 18;
+    }
 }

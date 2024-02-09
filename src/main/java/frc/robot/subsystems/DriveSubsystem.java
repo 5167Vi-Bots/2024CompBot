@@ -25,12 +25,14 @@ public class DriveSubsystem extends SubsystemBase {
         Pigeon = new PigeonIMU(DriveSubsystemConstants.PigeonID);
         Pigeon.setYaw(0);
 
-        mSwerveMods = new SwerveModule[] {
+       /* mSwerveMods = new SwerveModule[]{
             new SwerveModule(0, DriveSubsystemConstants.Mod0.constants),
             new SwerveModule(1, DriveSubsystemConstants.Mod1.constants),
             new SwerveModule(2, DriveSubsystemConstants.Mod2.constants),
             new SwerveModule(3, DriveSubsystemConstants.Mod3.constants)
-        };
+        }; */
+
+        
 
   }
 

@@ -8,21 +8,25 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import com.revrobotics.Rev2mDistanceSensor;
 
 //fritz
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.HelperClasses.Constants.BottomIntakeSubsystemConstants;
+import frc.robot.HelperClasses.Constants.TopIntakeSubsystemConstants;
 
 public class BottomIntakeSubsystem extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
   private VictorSPX bottomIntake1, bottomIntake2;
+  private Rev2mDistanceSensor distanceSensor;
   
   public BottomIntakeSubsystem() {
     bottomIntake1 = new VictorSPX(BottomIntakeSubsystemConstants.BottomIntakeMotor1ID); //1
     bottomIntake2 = new VictorSPX(BottomIntakeSubsystemConstants.BottomIntakeMotor2ID); //2
     bottomIntake1.setNeutralMode(NeutralMode.Brake);
     bottomIntake2.setNeutralMode(NeutralMode.Brake);
+    distanceSensor = new Rev2mDistanceSensor(TopIntakeSubsystemConstants.distanceSensorPort);
   }
 
   
@@ -54,6 +58,16 @@ public class BottomIntakeSubsystem extends SubsystemBase {
    bottomIntake1.set(ControlMode.PercentOutput, 0);    
   }
 
+  public boolean ringIn(){
+    if (distanceSensor.GetRange() < 100){
+      return true;
+      //run IntakeUp
+    } else {
+      return false; 
+      //run IntakeStop
+    }
+  }
+  
 
   /**
    * An example method querying a boolean state of the subsystem (for example, a digital sensor).
