@@ -31,9 +31,18 @@ public class DriveSubsystem extends SubsystemBase {
             new SwerveModule(2, DriveSubsystemConstants.Mod2.constants),
             new SwerveModule(3, DriveSubsystemConstants.Mod3.constants)
         }; */
+  }
 
-        
+  public void DriveTrain(){
+    //basic controller input
+  }
+  
+  public void FieldCentric(){
+    //switch to a field-centric drive (auto)
+  }
 
+  public void RobotCentric(){
+    //switch to a robot-centric drive (teleop)
   }
 
   /**
@@ -66,6 +75,8 @@ public class DriveSubsystem extends SubsystemBase {
   public double getYaw() {
     return Pigeon.getYaw();
   }
+
+
 
   @Override
   public void periodic() {
