@@ -12,11 +12,11 @@ public class AmpSubsystem extends SubsystemBase {
     }
 
     public void ampOut(){
-        ampMotor.setPosition(30);
+        ampMotor.set(1);
 
     }
      public void ampIn(){
-        ampMotor.setPosition(-30);
+        ampMotor.set(-.75);
 
     }
 
