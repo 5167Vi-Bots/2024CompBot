@@ -3,7 +3,9 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.subsystems;
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.VictorSPXControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
@@ -43,6 +45,27 @@ public class ShooterSubsystem extends SubsystemBase {
         });
   }
 
+  public void shootForward(){
+    shooterIntake1.set(VictorSPXControlMode.PercentOutput, -1);
+    shooterIntake2.set(VictorSPXControlMode.PercentOutput, -.75);
+    shooter1.set(1);
+    shooter2.set(1);
+  }
+
+  public void shootBack(){
+    shooterIntake1.set(VictorSPXControlMode.PercentOutput, .5);
+    shooterIntake2.set(VictorSPXControlMode.PercentOutput, .375);
+    shooter1.set(-.7);
+    shooter2.set(-.7);
+  }
+
+  public void shootStop(){
+    shooterIntake1.set(VictorSPXControlMode.PercentOutput, 0);
+    shooterIntake2.set(VictorSPXControlMode.PercentOutput, 0);
+    shooter1.set(0);
+    shooter1.set(0);
+  }
+
   /**
    * An example method querying a boolean state of the subsystem (for example, a digital sensor).
    *
@@ -62,4 +85,5 @@ public class ShooterSubsystem extends SubsystemBase {
   public void simulationPeriodic() {
     // This method will be called once per scheduler run during simulation
   }
+
 }
