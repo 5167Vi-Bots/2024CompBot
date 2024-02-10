@@ -7,8 +7,14 @@ package frc.robot;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.HelperClasses.Constants.ControllerPorts;
 import frc.robot.commands.Autos;
+import frc.robot.commands.BottomIntakeDown;
+import frc.robot.commands.BottomIntakeUp;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.HangCommand;
+import frc.robot.commands.TopIntakeDown;
+import frc.robot.commands.TopIntakeUp;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -47,7 +53,11 @@ public class RobotContainer {
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
     new Trigger(m_exampleSubsystem::exampleCondition)
         .onTrue(new ExampleCommand(m_exampleSubsystem));
-
+      // buttonBoard.button(11).toggleOnTrue(new BottomIntakeUp(null).alongWith(new TopIntakeUp(null)));
+      // buttonBoard.button(12).toggleOnTrue(new BottomIntakeDown(null).alongWith(new TopIntakeDown(null)));
+      // buttonBoard.button(1).toggleOnTrue(new ShootForward(null));
+      // buttonBoard.button(10).toggleOnTrue(new HangCommand(null));
+      // buttonBoard.button().toggleOnTrue(new )
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
   }
