@@ -4,13 +4,13 @@
 
 package frc.robot.commands;
 
-import frc.robot.subsystems.TopIntakeSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 
 /** An example command that uses an example subsystem. */
-public class TopIntakeDown extends Command {
+public class IntakeUp extends Command {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final TopIntakeSubsystem m_subsystem;
+  private final IntakeSubsystem m_subsystem;
 
   /**
    * Creates a new ExampleCommand.
@@ -18,7 +18,7 @@ public class TopIntakeDown extends Command {
    * @param subsystem The subsystem used by this command.
    * @return 
    */
-  public TopIntakeDown(TopIntakeSubsystem subsystem) {
+  public IntakeUp(IntakeSubsystem subsystem) {
     m_subsystem = subsystem;
     
     // Use addRequirements() here to declare subsystem dependencies.
@@ -32,7 +32,7 @@ public class TopIntakeDown extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_subsystem.IntakeDown();
+    m_subsystem.IntakeUp();
   }
 
   // Called once the command ends or is interrupted.

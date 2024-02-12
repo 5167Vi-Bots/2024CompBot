@@ -6,13 +6,11 @@ package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.HelperClasses.Constants.ControllerPorts;
-import frc.robot.commands.Autos;
-import frc.robot.commands.BottomIntakeDown;
-import frc.robot.commands.BottomIntakeUp;
+import frc.robot.commands.BadAuto;
+import frc.robot.commands.IntakeDown;
+import frc.robot.commands.IntakeUp;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.HangCommand;
-import frc.robot.commands.TopIntakeDown;
-import frc.robot.commands.TopIntakeUp;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -70,6 +68,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    return Autos.exampleAuto(m_exampleSubsystem);
+    return BadAuto.BadAuto(m_exampleSubsystem); //help i dont know how to fix this grahggrhiaushdnakwjlnfgilajksfdnkjse,ngaiwlsekj,ndfkajsdfmnaskjdfnasdkjfn
   }
 }

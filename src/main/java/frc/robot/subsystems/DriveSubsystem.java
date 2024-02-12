@@ -37,6 +37,10 @@ public class DriveSubsystem extends SubsystemBase {
     //basic controller input
   }
   
+  public void driveDistance() {
+    //use encoders or sum on the drive train B)
+  }
+  
   public void FieldCentric(){
     //switch to a field-centric drive (auto)
   }
@@ -89,4 +93,6 @@ public class DriveSubsystem extends SubsystemBase {
   public void simulationPeriodic() {
     // This method will be called once per scheduler run during simulation
   }
+
+
 }

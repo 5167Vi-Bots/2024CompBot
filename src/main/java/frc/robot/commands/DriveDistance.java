@@ -4,23 +4,14 @@
 
 package frc.robot.commands;
 
-import frc.robot.subsystems.BottomIntakeSubsystem;
+import frc.robot.subsystems.DriveSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 
-/** An example command that uses an example subsystem. */
-public class BottomIntakeUp extends Command {
-  @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final BottomIntakeSubsystem m_subsystem;
-
-  /**
-   * Creates a new ExampleCommand.
-   *
-   * @param subsystem The subsystem used by this command.
-   * @return 
-   */
-  public BottomIntakeUp(BottomIntakeSubsystem subsystem) {
-    m_subsystem = subsystem;
-    
+public class DriveDistance extends Command {
+  /** Creates a new DriveDistance. */
+  private DriveSubsystem driveSubsystem;
+  public DriveDistance(DriveSubsystem subsystem) {
+    driveSubsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
   }
@@ -32,7 +23,7 @@ public class BottomIntakeUp extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_subsystem.IntakeUp();
+    driveSubsystem.driveDistance();
   }
 
   // Called once the command ends or is interrupted.

@@ -9,6 +9,7 @@ import com.ctre.phoenix.motorcontrol.VictorSPXControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
+import com.revrobotics.Rev2mDistanceSensor;
 
 //Caleb
 import edu.wpi.first.wpilibj2.command.Command;
@@ -18,6 +19,7 @@ import frc.robot.HelperClasses.Constants.ShooterSubsystemConstants;
 public class ShooterSubsystem extends SubsystemBase {
   private VictorSPX shooterIntake1, shooterIntake2;
   private TalonFX shooter1, shooter2; 
+  private Rev2mDistanceSensor distanceSensor;
   /** Creates a new ExampleSubsystem. */
   public ShooterSubsystem() {
     shooterIntake1 = new VictorSPX(ShooterSubsystemConstants.ShooterIntakeMotor1ID);  
@@ -28,6 +30,7 @@ public class ShooterSubsystem extends SubsystemBase {
     shooterIntake2.setNeutralMode(NeutralMode.Brake);
     shooter1.setNeutralMode(NeutralModeValue.Brake);
     shooter2.setNeutralMode(NeutralModeValue.Brake);
+    distanceSensor = new Rev2mDistanceSensor(ShooterSubsystemConstants.distanceSensorPort);
   }
 
 
@@ -63,8 +66,22 @@ public class ShooterSubsystem extends SubsystemBase {
     shooterIntake1.set(VictorSPXControlMode.PercentOutput, 0);
     shooterIntake2.set(VictorSPXControlMode.PercentOutput, 0);
     shooter1.set(0);
-    shooter1.set(0);
+    shooter2.set(0);
   }
+
+  public double getDistance(){
+    return distanceSensor.GetRange();
+  }
+
+  //TODO test and correct value
+  public boolean ringIn(){
+    if (distanceSensor.GetRange() < 100){
+      return true; 
+    } else {
+      return false; 
+    }
+  }
+
 
   /**
    * An example method querying a boolean state of the subsystem (for example, a digital sensor).

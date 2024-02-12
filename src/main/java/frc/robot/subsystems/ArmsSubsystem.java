@@ -11,7 +11,6 @@ import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.HelperClasses.Constants.ArmsSubsystemConstants;
-import frc.robot.HelperClasses.Constants.TopIntakeSubsystemConstants;
 
 public class ArmsSubsystem extends SubsystemBase { 
   private TalonFX rightArm, leftArm;
@@ -63,12 +62,12 @@ public void LeftArmStop(){
 
   public void ExtendArms()
   {
-
+    //may not need to exist
   }
 
   public void RetractArms()
   {
-
+    //may not need to exist
   }
 
   /**

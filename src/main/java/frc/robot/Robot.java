@@ -25,6 +25,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+    System.out.println("(o o)");
+    System.out.println("/___\\");
+    System.out.println("bob is rapidly losing his ability to cope");
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();

@@ -10,23 +10,22 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.revrobotics.Rev2mDistanceSensor;
 
-//fritz
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.HelperClasses.Constants.BottomIntakeSubsystemConstants;
-import frc.robot.HelperClasses.Constants.TopIntakeSubsystemConstants;
+import frc.robot.HelperClasses.Constants.IntakeSubsystemConstants;
+import frc.robot.HelperClasses.Constants.ShooterSubsystemConstants;
 
-public class BottomIntakeSubsystem extends SubsystemBase {
+public class IntakeSubsystem extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
-  private VictorSPX bottomIntake1, bottomIntake2;
+  private VictorSPX intake1, intake2;
   private Rev2mDistanceSensor distanceSensor;
   
-  public BottomIntakeSubsystem() {
-    bottomIntake1 = new VictorSPX(BottomIntakeSubsystemConstants.BottomIntakeMotor1ID); //1
-    bottomIntake2 = new VictorSPX(BottomIntakeSubsystemConstants.BottomIntakeMotor2ID); //2
-    bottomIntake1.setNeutralMode(NeutralMode.Brake);
-    bottomIntake2.setNeutralMode(NeutralMode.Brake);
-    distanceSensor = new Rev2mDistanceSensor(TopIntakeSubsystemConstants.distanceSensorPort);
+  public IntakeSubsystem() {
+    intake1 = new VictorSPX(IntakeSubsystemConstants.IntakeMotor1ID); //1
+    intake2 = new VictorSPX(IntakeSubsystemConstants.IntakeMotor2ID); //2
+    intake1.setNeutralMode(NeutralMode.Brake);
+    intake2.setNeutralMode(NeutralMode.Brake);
+    distanceSensor = new Rev2mDistanceSensor(ShooterSubsystemConstants.distanceSensorPort);
   }
 
   
@@ -45,17 +44,17 @@ public class BottomIntakeSubsystem extends SubsystemBase {
   }
 
   public void IntakeUp() {
-   bottomIntake1.set(ControlMode.PercentOutput, .7);
-   bottomIntake2.set(ControlMode.PercentOutput, .7);  }
+   intake1.set(ControlMode.PercentOutput, .7);
+   intake2.set(ControlMode.PercentOutput, .7);  }
 
   public void IntakeDown() {
-   bottomIntake1.set(ControlMode.PercentOutput, -.4);
-   bottomIntake2.set(ControlMode.PercentOutput, -.4);
+   intake1.set(ControlMode.PercentOutput, -.4);
+   intake2.set(ControlMode.PercentOutput, -.4);
   }
 
   public void IntakeStop(){
-   bottomIntake1.set(ControlMode.PercentOutput, 0);
-   bottomIntake1.set(ControlMode.PercentOutput, 0);    
+   intake1.set(ControlMode.PercentOutput, 0);
+   intake1.set(ControlMode.PercentOutput, 0);    
   }
 
   public boolean ringIn(){
