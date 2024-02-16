@@ -6,18 +6,19 @@ import frc.robot.HelperClasses.Constants.AmpSubsystemConstants;
  
 public class AmpSubsystem extends SubsystemBase {
 
-    private TalonFX ampMotor;
+    private TalonFX ampMotor1, ampMotor2;
     public AmpSubsystem() {
-       ampMotor = new TalonFX(AmpSubsystemConstants.ampMotorID);
+        ampMotor1 = new TalonFX(AmpSubsystemConstants.ampMotor1ID);
+        ampMotor2 = new TalonFX(AmpSubsystemConstants.ampMotor2ID);
     }
 
     public void ampOut(){
-        ampMotor.set(1);
-
+        ampMotor1.set(1);
+        ampMotor2.set(1);
     }
      public void ampIn(){
-        ampMotor.set(-.75);
-
+        ampMotor1.set(-.75);
+        ampMotor1.set(-.75);
     }
 
 // test these later and make them accurate
