@@ -8,7 +8,7 @@ import frc.robot.subsystems.ShooterSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 
 /** An example command that uses an example subsystem. */
-public class ShootForward extends Command {
+public class WarmUp extends Command {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final ShooterSubsystem ShooterSubsystem;
 
@@ -18,7 +18,7 @@ public class ShootForward extends Command {
    * @param subsystem The subsystem used by this command.
    * @return
    */
-  public ShootForward(ShooterSubsystem subsystem) {
+  public WarmUp(ShooterSubsystem subsystem) {
     ShooterSubsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
@@ -33,7 +33,7 @@ public class ShootForward extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    ShooterSubsystem.shootForward();
+    ShooterSubsystem.warmUp();
   }
 
   @Override

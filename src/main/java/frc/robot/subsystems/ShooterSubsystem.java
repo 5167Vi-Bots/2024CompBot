@@ -3,7 +3,6 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.subsystems;
-import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.VictorSPXControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
@@ -51,15 +50,22 @@ public class ShooterSubsystem extends SubsystemBase {
   public void shootForward(){
     shooterIntake1.set(VictorSPXControlMode.PercentOutput, -1);
     shooterIntake2.set(VictorSPXControlMode.PercentOutput, -.75);
+    }
+
+  public void shootBack(){
+    shooter1.set(-.7);
+    shooter2.set(-.7);  
+    shooterIntake1.set(VictorSPXControlMode.PercentOutput, .5);
+    shooterIntake2.set(VictorSPXControlMode.PercentOutput, .375);
+  }
+
+  public void warmUp(){
     shooter1.set(1);
     shooter2.set(1);
   }
 
-  public void shootBack(){
-    shooterIntake1.set(VictorSPXControlMode.PercentOutput, .5);
-    shooterIntake2.set(VictorSPXControlMode.PercentOutput, .375);
-    shooter1.set(-.7);
-    shooter2.set(-.7);
+  public void warmDown(){
+    //a memorial
   }
 
   public void shootStop(){

@@ -6,14 +6,19 @@ package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.HelperClasses.Constants.ControllerPorts;
+import frc.robot.commands.AmpIn;
+import frc.robot.commands.AmpOut;
+import frc.robot.commands.ArmsDown;
+import frc.robot.commands.ArmsUp;
 import frc.robot.commands.BadAuto;
 import frc.robot.commands.IntakeDown;
 import frc.robot.commands.IntakeUp;
+import frc.robot.commands.ShootForward;
+import frc.robot.commands.WarmUp;
+import frc.robot.commands.ShootBack;
 import frc.robot.commands.ExampleCommand;
-import frc.robot.commands.HangCommand;
 import frc.robot.subsystems.ExampleSubsystem;
-import frc.robot.subsystems.ShooterSubsystem;
-import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -51,11 +56,18 @@ public class RobotContainer {
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
     new Trigger(m_exampleSubsystem::exampleCondition)
         .onTrue(new ExampleCommand(m_exampleSubsystem));
-      // buttonBoard.button(11).toggleOnTrue(new BottomIntakeUp(null).alongWith(new TopIntakeUp(null)));
-      // buttonBoard.button(12).toggleOnTrue(new BottomIntakeDown(null).alongWith(new TopIntakeDown(null)));
-      // buttonBoard.button(1).toggleOnTrue(new ShootForward(null));
-      // buttonBoard.button(10).toggleOnTrue(new HangCommand(null));
-      // buttonBoard.button().toggleOnTrue(new )
+       buttonBoard.button(11).toggleOnTrue(new IntakeUp(null));
+       buttonBoard.button(12).toggleOnTrue(Commands.parallel( new ShootBack(null), new IntakeDown(null)));
+       
+       buttonBoard.button(8).toggleOnTrue(new AmpIn(null));
+       buttonBoard.button(7).toggleOnTrue(new AmpOut(null));
+
+       buttonBoard.button(2).toggleOnTrue(new WarmUp(null));
+       buttonBoard.button(1).toggleOnTrue(new ShootForward(null));
+
+       buttonBoard.button(6).toggleOnTrue(new ArmsUp(null));
+       buttonBoard.button(4).toggleOnTrue(new ArmsDown(null));
+
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
   }

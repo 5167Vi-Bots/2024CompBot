@@ -22,29 +22,21 @@ rightArm.setNeutralMode(NeutralModeValue.Brake);
 leftArm.setNeutralMode(NeutralModeValue.Brake);
 }
 
-public void LeftArmStop(){
+public void armsStop(){
    leftArm.set(0);
+   rightArm.set(0);
   }
 
-  public void RightArmStop(){
-    rightArm.set(0);
-  }
-
-  public void RightArmUp(){
+  public void armsUp(){
     rightArm.set(.5);
-  }
-  
-  public void RightArmDown(){
-    rightArm.set(-0.5);
-  }
-  
-  public void LeftArmUp(){
     leftArm.set(.5);
   }
-
-  public void LeftArmDown(){
+  
+  public void armsDown(){
+    rightArm.set(-.5);
     leftArm.set(-.5);
   }
+
 
   /**
    * Example command factory method.
