@@ -33,21 +33,23 @@ public class DriveSubsystem extends SubsystemBase {
         }; */
   }
 
-  public void DriveTrain(){
+  public void driveTrain(){
     //basic controller input
   }
   
-  public void driveDistance() {
+  public void driveDistance(double distance) {
     //use encoders or sum on the drive train B)
   }
   
-  public void FieldCentric(){
+  public void fieldCentric(){
     //switch to a field-centric drive (auto)
   }
 
-  public void RobotCentric(){
+  public void robotCentric(){
     //switch to a robot-centric drive (teleop)
   }
+
+  
 
   /**
    * Example command factory method.

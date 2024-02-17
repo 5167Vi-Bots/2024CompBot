@@ -43,16 +43,16 @@ public class IntakeSubsystem extends SubsystemBase {
         });
   }
 
-  public void IntakeUp() {
+  public void intakeUp() {
    intake1.set(ControlMode.PercentOutput, .7);
    intake2.set(ControlMode.PercentOutput, .7);  }
 
-  public void IntakeDown() {
+  public void intakeDown() {
    intake1.set(ControlMode.PercentOutput, -.4);
    intake2.set(ControlMode.PercentOutput, -.4);
   }
 
-  public void IntakeStop(){
+  public void intakeStop(){
    intake1.set(ControlMode.PercentOutput, 0);
    intake1.set(ControlMode.PercentOutput, 0);    
   }

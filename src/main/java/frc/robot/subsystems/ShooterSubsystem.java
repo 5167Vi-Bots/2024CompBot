@@ -75,6 +75,10 @@ public class ShooterSubsystem extends SubsystemBase {
     shooter2.set(0);
   }
 
+  public void getPosition(){
+    //use limelight to find our position
+  }
+
   public double getDistance(){
     return distanceSensor.GetRange();
   }
