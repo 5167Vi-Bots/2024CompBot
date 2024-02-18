@@ -3,6 +3,7 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.subsystems;
+import java.io.FileReader;
 import java.util.function.Supplier;
 
 import com.ctre.phoenix6.Utils;
@@ -19,6 +20,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.HelperClasses.Constants;
+import frc.robot.generated.TunerConstants;
 
 public class DriveSubsystem extends SwerveDrivetrain implements Subsystem {
 
@@ -35,6 +37,7 @@ public class DriveSubsystem extends SwerveDrivetrain implements Subsystem {
           /* one-time action goes here */
         });
   }
+  private double MaxAngularRate = 1.5 * Math.PI; // 3/4 of a rotation per second max angular velocity
 
   /**
    * An example method querying a boolean state of the subsystem (for example, a digital sensor).
@@ -60,6 +63,9 @@ public class DriveSubsystem extends SwerveDrivetrain implements Subsystem {
     private static final double kSimLoopPeriod = 0.005; // 5 ms
     private Notifier m_simNotifier = null;
     private double m_lastSimTime;
+    private final SwerveRequest.SwerveDriveBrake brake = new SwerveRequest.SwerveDriveBrake();
+    private final SwerveRequest.PointWheelsAt point = new SwerveRequest.PointWheelsAt();
+    public double MaxSpeed = TunerConstants.kSpeedAt12VoltsMps; // kSpeedAt12VoltsMps desired top speed
 
     public DriveSubsystem(SwerveDrivetrainConstants driveTrainConstants, double OdometryUpdateFrequency, SwerveModuleConstants... modules) {
         super(driveTrainConstants, OdometryUpdateFrequency, modules);
@@ -73,18 +79,44 @@ public class DriveSubsystem extends SwerveDrivetrain implements Subsystem {
             startSimThread();
         }
     }
-
+    private boolean FieldOrentedControl = true;
   private final SwerveRequest.FieldCentric drive = new SwerveRequest.FieldCentric()
       .withDeadband(MaxSpeed * 0.1).withRotationalDeadband(MaxAngularRate * 0.1) // Add a 10% deadband
       .withDriveRequestType(DriveRequestType.OpenLoopVoltage); // I want field-centric
                                                                // driving in open loop
+ private final SwerveRequest.RobotCentric Botdrive = new SwerveRequest.RobotCentric()
+      .withDeadband(MaxSpeed * 0.1).withRotationalDeadband(MaxAngularRate * 0.1) // Add a 10% deadband
+      .withDriveRequestType(DriveRequestType.OpenLoopVoltage); // I want field-centric
+                                                               // driving in open loop
+
+
     public void MoveRobot(double UpDown, double LeftRight, double Rotate)
     {
-      applyRequest(() -> drive.withVelocityX(-UpDown * MaxSpeed) // Drive forward with
+
+      if (FieldOrentedControl) {
+              applyRequest(() -> drive.withVelocityX(-UpDown * MaxSpeed) // Drive forward with
                                                                                            // negative Y (forward)
             .withVelocityY(-LeftRight * MaxSpeed) // Drive left with negative X (left)
             .withRotationalRate(-Rotate * MaxAngularRate) // Drive counterclockwise with negative X (left)
         );
+      }
+      else
+      {
+          RobotDrive(UpDown, LeftRight, Rotate);
+      }
+    }
+
+    public void RobotDrive(double UpDown, double LeftRight, double Rotate) {
+                applyRequest(() -> Botdrive.withVelocityX(-UpDown * MaxSpeed) // Drive forward with
+                                                                                           // negative Y (forward)
+            .withVelocityY(-LeftRight * MaxSpeed) // Drive left with negative X (left)
+            .withRotationalRate(-Rotate * MaxAngularRate) // Drive counterclockwise with negative X (left)
+        );
+    }
+
+    public void SwitchBetweenFieldAndRobotOriented()
+    {
+      FieldOrentedControl = !FieldOrentedControl;
     }
 
     public Command applyRequest(Supplier<SwerveRequest> requestSupplier) {
