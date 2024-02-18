@@ -3,6 +3,7 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.subsystems;
+
 import java.io.FileReader;
 import java.util.function.Supplier;
 
@@ -15,7 +16,7 @@ import com.ctre.phoenix6.mechanisms.swerve.SwerveRequest;
 
 import edu.wpi.first.wpilibj.Notifier;
 import edu.wpi.first.wpilibj.RobotController;
-//CTR
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -23,6 +24,7 @@ import frc.robot.HelperClasses.Constants;
 import frc.robot.generated.TunerConstants;
 
 public class DriveSubsystem extends SwerveDrivetrain implements Subsystem {
+
 
   /**
    * Example command factory method.
@@ -44,14 +46,23 @@ public class DriveSubsystem extends SwerveDrivetrain implements Subsystem {
    *
    * @return value of some boolean subsystem state, such as a digital sensor.
    */
-  public boolean exampleCondition() {
-    // Query some boolean state, such as a digital sensor.
-    return false;
+  public double getPitch() {
+    return Pigeon.getPitch();
+  }
+
+  public double getRoll() {
+    return Pigeon.getRoll();
+  }
+
+  public double getYaw() {
+    return Pigeon.getYaw();
   }
 
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
+    SmartDashboard.putNumber("Pitch", getPitch());
+    SmartDashboard.putNumber("Roll", getRoll());
+    SmartDashboard.putNumber("Yaw", getYaw());
   }
 
   @Override

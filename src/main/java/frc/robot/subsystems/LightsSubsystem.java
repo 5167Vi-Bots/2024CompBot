@@ -3,15 +3,33 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.subsystems;
+import edu.wpi.first.wpilibj.DriverStation;
 //Aiden
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.HelperClasses.Constants;
+
+import com.ctre.phoenix.led.*;
+
+
 
 public class LightsSubsystem extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
-  public LightsSubsystem() {}
-
-  /**
+  public LightsSubsystem() {
+    candle = new CANdle(Constants.LightsSubsystemConstants.CandleLightID, Constants.LightsSubsystemConstants.CandleLightCan);
+  }
+    private CANdle candle;
+    private int toInt (double input) {
+      return (int)input * 255;
+    }
+    public void setOrange()
+    {
+      //double current = DriverStation.getMatchTime();
+      //DriverStation.getAlliance();
+      candle.setLEDs(toInt(Constants.LightsSubsystemConstants.Orange.red), toInt(Constants.LightsSubsystemConstants.Orange.green), toInt(Constants.LightsSubsystemConstants.Orange.blue));
+    }
+    
+      /**
    * Example command factory method.
    *
    * @return a command
