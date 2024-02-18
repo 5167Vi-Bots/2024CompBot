@@ -3,14 +3,24 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.subsystems;
+import java.util.function.Supplier;
+
+import com.ctre.phoenix6.Utils;
+import com.ctre.phoenix6.mechanisms.swerve.SwerveDrivetrain;
+import com.ctre.phoenix6.mechanisms.swerve.SwerveDrivetrainConstants;
+import com.ctre.phoenix6.mechanisms.swerve.SwerveModule.DriveRequestType;
+import com.ctre.phoenix6.mechanisms.swerve.SwerveModuleConstants;
+import com.ctre.phoenix6.mechanisms.swerve.SwerveRequest;
+
+import edu.wpi.first.wpilibj.Notifier;
+import edu.wpi.first.wpilibj.RobotController;
 //CTR
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Subsystem;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.HelperClasses.Constants;
 
-public class DriveSubsystem extends SubsystemBase {
-  /** Creates a new ExampleSubsystem. */
-  public DriveSubsystem() {}
+public class DriveSubsystem extends SwerveDrivetrain implements Subsystem {
 
   /**
    * Example command factory method.
@@ -45,4 +55,54 @@ public class DriveSubsystem extends SubsystemBase {
   public void simulationPeriodic() {
     // This method will be called once per scheduler run during simulation
   }
+  
+  
+    private static final double kSimLoopPeriod = 0.005; // 5 ms
+    private Notifier m_simNotifier = null;
+    private double m_lastSimTime;
+
+    public DriveSubsystem(SwerveDrivetrainConstants driveTrainConstants, double OdometryUpdateFrequency, SwerveModuleConstants... modules) {
+        super(driveTrainConstants, OdometryUpdateFrequency, modules);
+        if (Utils.isSimulation()) {
+            startSimThread();
+        }
+    }
+    public DriveSubsystem(SwerveDrivetrainConstants driveTrainConstants, SwerveModuleConstants... modules) {
+        super(driveTrainConstants, modules);
+        if (Utils.isSimulation()) {
+            startSimThread();
+        }
+    }
+
+  private final SwerveRequest.FieldCentric drive = new SwerveRequest.FieldCentric()
+      .withDeadband(MaxSpeed * 0.1).withRotationalDeadband(MaxAngularRate * 0.1) // Add a 10% deadband
+      .withDriveRequestType(DriveRequestType.OpenLoopVoltage); // I want field-centric
+                                                               // driving in open loop
+    public void MoveRobot(double UpDown, double LeftRight, double Rotate)
+    {
+      applyRequest(() -> drive.withVelocityX(-UpDown * MaxSpeed) // Drive forward with
+                                                                                           // negative Y (forward)
+            .withVelocityY(-LeftRight * MaxSpeed) // Drive left with negative X (left)
+            .withRotationalRate(-Rotate * MaxAngularRate) // Drive counterclockwise with negative X (left)
+        );
+    }
+
+    public Command applyRequest(Supplier<SwerveRequest> requestSupplier) {
+        return run(() -> this.setControl(requestSupplier.get()));
+    }
+
+    private void startSimThread() {
+        m_lastSimTime = Utils.getCurrentTimeSeconds();
+
+        /* Run simulation at a faster rate so PID gains behave more reasonably */
+        m_simNotifier = new Notifier(() -> {
+            final double currentTime = Utils.getCurrentTimeSeconds();
+            double deltaTime = currentTime - m_lastSimTime;
+            m_lastSimTime = currentTime;
+
+            /* use the measured time delta, get battery voltage from WPILib */
+            updateSimState(deltaTime, RobotController.getBatteryVoltage());
+        });
+        m_simNotifier.startPeriodic(kSimLoopPeriod);
+    }
 }
