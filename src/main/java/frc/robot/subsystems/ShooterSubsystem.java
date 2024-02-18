@@ -3,8 +3,10 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.subsystems;
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.VictorSPXControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
@@ -16,20 +18,20 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.HelperClasses.Constants.ShooterSubsystemConstants;
 
 public class ShooterSubsystem extends SubsystemBase {
-  private VictorSPX shooterIntake1, shooterIntake2;
+  private TalonSRX shooterIntake1, shooterIntake2;
   private TalonFX shooter1, shooter2; 
   private Rev2mDistanceSensor distanceSensor;
-  /** Creates a new ExampleSubsystem. */
+  /** Creates a new ExampletuneSubsystem. */
   public ShooterSubsystem() {
-    shooterIntake1 = new VictorSPX(ShooterSubsystemConstants.ShooterIntakeMotor1ID);  
-    shooterIntake2 = new VictorSPX(ShooterSubsystemConstants.ShooterIntakeMotor2ID);  
+    shooterIntake1 = new TalonSRX(ShooterSubsystemConstants.ShooterIntakeMotor1ID);  
+    shooterIntake2 = new TalonSRX(ShooterSubsystemConstants.ShooterIntakeMotor2ID);  
     shooter1 = new TalonFX(ShooterSubsystemConstants.ShooterMotor1ID, ShooterSubsystemConstants.ShooterMotor1CAN);
     shooter2 = new TalonFX(ShooterSubsystemConstants.ShooterMotor2ID, ShooterSubsystemConstants.ShooterMotor2CAN);
-    shooterIntake1.setNeutralMode(NeutralMode.Brake);
-    shooterIntake2.setNeutralMode(NeutralMode.Brake);
+    shooterIntake1.setNeutralMode(NeutralMode.Coast);
+    shooterIntake2.setNeutralMode(NeutralMode.Coast);
     shooter1.setNeutralMode(NeutralModeValue.Brake);
     shooter2.setNeutralMode(NeutralModeValue.Brake);
-    distanceSensor = new Rev2mDistanceSensor(ShooterSubsystemConstants.distanceSensorPort);
+    distanceSensor = null;// new Rev2mDistanceSensor(ShooterSubsystemConstants.distanceSensorPort);
   }
 
 
@@ -48,15 +50,15 @@ public class ShooterSubsystem extends SubsystemBase {
   }
 
   public void shootForward(){
-    shooterIntake1.set(VictorSPXControlMode.PercentOutput, -1);
-    shooterIntake2.set(VictorSPXControlMode.PercentOutput, -.75);
+    shooterIntake1.set(ControlMode.PercentOutput, 1);
+    shooterIntake2.set(ControlMode.PercentOutput, .75);
     }
 
   public void shootBack(){
     shooter1.set(-.7);
     shooter2.set(-.7);  
-    shooterIntake1.set(VictorSPXControlMode.PercentOutput, .5);
-    shooterIntake2.set(VictorSPXControlMode.PercentOutput, .375);
+    shooterIntake1.set(ControlMode.PercentOutput, .5);
+    shooterIntake2.set(ControlMode.PercentOutput, .375);
   }
 
   public void warmUp(){
@@ -69,8 +71,8 @@ public class ShooterSubsystem extends SubsystemBase {
   }
 
   public void shootStop(){
-    shooterIntake1.set(VictorSPXControlMode.PercentOutput, 0);
-    shooterIntake2.set(VictorSPXControlMode.PercentOutput, 0);
+    shooterIntake1.set(ControlMode.PercentOutput, 0);
+    shooterIntake2.set(ControlMode.PercentOutput, 0);
     shooter1.set(0);
     shooter2.set(0);
   }

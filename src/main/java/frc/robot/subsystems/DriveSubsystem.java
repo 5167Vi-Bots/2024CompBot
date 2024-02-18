@@ -15,15 +15,16 @@ import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 
 import com.ctre.phoenix.sensors.PigeonIMU; //pigeon3
+import com.ctre.phoenix6.hardware.Pigeon2;
 import com.ctre.phoenix6.mechanisms.swerve.SwerveModule;
 
 public class DriveSubsystem extends SubsystemBase {
   public SwerveDriveOdometry swerveOdometry;
   public SwerveModule[] mSwerveMods;
-  public PigeonIMU Pigeon;
+  //public Pigeon2 Pigeon;
   public DriveSubsystem() {
-        Pigeon = new PigeonIMU(DriveSubsystemConstants.PigeonID);
-        Pigeon.setYaw(0);
+        //Pigeon = new Pigeon2(DriveSubsystemConstants.PigeonID);
+        //Pigeon.setYaw(0);
 
        /* mSwerveMods = new SwerveModule[]{
             new SwerveModule(0, DriveSubsystemConstants.Mod0.constants),
@@ -71,24 +72,24 @@ public class DriveSubsystem extends SubsystemBase {
    * @return value of some boolean subsystem state, such as a digital sensor.
    */
   public double getPitch() {
-    return Pigeon.getPitch();
+    return 0;//Pigeon.getPitch().getValue();
   }
 
   public double getRoll() {
-    return Pigeon.getRoll();
+    return 0;//Pigeon.getRoll().getValue();
   }
 
   public double getYaw() {
-    return Pigeon.getYaw();
+    return 0;//Pigeon.getYaw().getValue();
   }
 
 
 
   @Override
   public void periodic() {
-    SmartDashboard.putNumber("Pitch", getPitch());
-    SmartDashboard.putNumber("Roll", getRoll());
-    SmartDashboard.putNumber("Yaw", getYaw());
+    //SmartDashboard.putNumber("Pitch", getPitch());
+    //SmartDashboard.putNumber("Roll", getRoll());
+    //SmartDashboard.putNumber("Yaw", getYaw());
   }
 
   @Override

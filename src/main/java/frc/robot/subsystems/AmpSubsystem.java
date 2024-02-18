@@ -1,4 +1,5 @@
 package frc.robot.subsystems;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix6.hardware.TalonFX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -6,10 +7,10 @@ import frc.robot.HelperClasses.Constants.AmpSubsystemConstants;
  
 public class AmpSubsystem extends SubsystemBase {
 
-    private TalonFX ampMotor1, ampMotor2;
+    private TalonSRX ampMotor1, ampMotor2;
     public AmpSubsystem() {
-        ampMotor1 = new TalonFX(AmpSubsystemConstants.ampMotor1ID);
-        ampMotor2 = new TalonFX(AmpSubsystemConstants.ampMotor2ID);
+        ampMotor1 = new TalonSRX(AmpSubsystemConstants.ampMotor1ID);
+        ampMotor2 = new TalonSRX(AmpSubsystemConstants.ampMotor2ID);
     }
 
     public void ampOut(){

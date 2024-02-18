@@ -17,7 +17,13 @@ import frc.robot.commands.ShootForward;
 import frc.robot.commands.WarmUp;
 import frc.robot.commands.ShootBack;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.subsystems.AmpSubsystem;
+import frc.robot.subsystems.ArmsSubsystem;
+import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.LightsSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -34,6 +40,13 @@ public class RobotContainer {
   private final CommandJoystick buttonBoard = new CommandJoystick(ControllerPorts.kOperatorControllerPort);
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
+
+  ArmsSubsystem arms = new ArmsSubsystem();
+  DriveSubsystem drive = new DriveSubsystem();
+  LightsSubsystem lights = new LightsSubsystem();
+  ShooterSubsystem shooty = new ShooterSubsystem();
+  AmpSubsystem amp = new AmpSubsystem();
+  IntakeSubsystem intake = new IntakeSubsystem();
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
 
@@ -56,17 +69,17 @@ public class RobotContainer {
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
     new Trigger(m_exampleSubsystem::exampleCondition)
         .onTrue(new ExampleCommand(m_exampleSubsystem));
-       buttonBoard.button(11).toggleOnTrue(new IntakeUp(null));
-       buttonBoard.button(12).toggleOnTrue(Commands.parallel( new ShootBack(null), new IntakeDown(null)));
+       buttonBoard.button(11).whileTrue(new IntakeUp(intake));
+       buttonBoard.button(12).toggleOnTrue(Commands.parallel( new ShootBack(shooty), new IntakeDown(intake)));
        
-       buttonBoard.button(8).toggleOnTrue(new AmpIn(null));
-       buttonBoard.button(7).toggleOnTrue(new AmpOut(null));
+       buttonBoard.button(8).toggleOnTrue(new AmpIn(amp));
+       buttonBoard.button(7).toggleOnTrue(new AmpOut(amp));
 
-       buttonBoard.button(2).toggleOnTrue(new WarmUp(null));
-       buttonBoard.button(1).toggleOnTrue(new ShootForward(null));
+       buttonBoard.button(2).toggleOnTrue(new WarmUp(shooty));
+       buttonBoard.button(1).toggleOnTrue(new ShootForward(shooty));
 
-       buttonBoard.button(6).toggleOnTrue(new ArmsUp(null));
-       buttonBoard.button(4).toggleOnTrue(new ArmsDown(null));
+       buttonBoard.button(6).toggleOnTrue(new ArmsUp(arms));
+       buttonBoard.button(4).toggleOnTrue(new ArmsDown(arms));
 
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.

@@ -6,10 +6,10 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants.CamMode;
-import frc.robot.Constants.LedMode;
-import frc.robot.Constants.PipeType;
-import frc.robot.util.XYOutputs;
+// import frc.robot.Constants.CamMode;
+// import frc.robot.Constants.LedMode;
+// import frc.robot.Constants.PipeType;
+// import frc.robot.util.XYOutputs;
 
 public class LimelightSubsystem extends SubsystemBase{
     private NetworkTableEntry tv, tx, ty, ta, camMode, ledMode, pipeline;

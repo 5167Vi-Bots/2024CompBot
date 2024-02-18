@@ -37,7 +37,9 @@ public class WarmUp extends Command {
   }
 
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    ShooterSubsystem.shootStop();
+  }
   // Returns true when the command should end.
   @Override
 

@@ -109,12 +109,12 @@ public class Constants {
         public static final String ShooterMotor1CAN = RioCanBus;
         public static final int ShooterMotor2ID = 12;
         public static final String ShooterMotor2CAN = RioCanBus;
-        public static final Port distanceSensorPort = Port.kOnboard;
+        public static final Port distanceSensorPort = Port.kMXP;
     }
 
     public static class ControllerPorts {
-        public static final int kDriverControllerPort = 17;
-        public static final int kOperatorControllerPort = 18;
+        public static final int kDriverControllerPort = 0;
+        public static final int kOperatorControllerPort = 1;
     }
 
     

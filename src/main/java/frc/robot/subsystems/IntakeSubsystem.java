@@ -8,6 +8,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import com.ctre.phoenix6.hardware.TalonFX;
 import com.revrobotics.Rev2mDistanceSensor;
 
 import edu.wpi.first.wpilibj2.command.Command;
@@ -16,15 +17,15 @@ import frc.robot.HelperClasses.Constants.IntakeSubsystemConstants;
 import frc.robot.HelperClasses.Constants.ShooterSubsystemConstants;
 
 public class IntakeSubsystem extends SubsystemBase {
-  /** Creates a new ExampleSubsystem. */
-  private VictorSPX intake1, intake2;
+/** Creates a new ExampleSubsystem. */
+  private TalonFX intake1, intake2;
   private Rev2mDistanceSensor distanceSensor;
   
   public IntakeSubsystem() {
-    intake1 = new VictorSPX(IntakeSubsystemConstants.IntakeMotor1ID); //1
-    intake2 = new VictorSPX(IntakeSubsystemConstants.IntakeMotor2ID); //2
-    intake1.setNeutralMode(NeutralMode.Brake);
-    intake2.setNeutralMode(NeutralMode.Brake);
+    intake1 = new TalonFX(IntakeSubsystemConstants.IntakeMotor1ID); //1
+    intake2 = new TalonFX(IntakeSubsystemConstants.IntakeMotor2ID); //2
+    //intake1.setNeutralMode(NeutralMode.Brake);
+    //intake2.setNeutralMode(NeutralMode.Brake);
     distanceSensor = new Rev2mDistanceSensor(ShooterSubsystemConstants.distanceSensorPort);
   }
 
@@ -44,20 +45,22 @@ public class IntakeSubsystem extends SubsystemBase {
   }
 
   public void intakeUp() {
-   intake1.set(ControlMode.PercentOutput, .7);
-   intake2.set(ControlMode.PercentOutput, .7);  }
+   intake1.set(-.7);
+   intake2.set( -.7);  }
 
   public void intakeDown() {
-   intake1.set(ControlMode.PercentOutput, -.4);
-   intake2.set(ControlMode.PercentOutput, -.4);
+   intake1.set(.4);
+   intake2.set(.4);
   }
 
   public void intakeStop(){
-   intake1.set(ControlMode.PercentOutput, 0);
-   intake1.set(ControlMode.PercentOutput, 0);    
+   intake1.set( 0);
+   intake2.set(0);    
   }
 
   public boolean ringIn(){
+    if (distanceSensor == null)
+      return false;
     if (distanceSensor.GetRange() < 100){
       return true;
       //run IntakeUp

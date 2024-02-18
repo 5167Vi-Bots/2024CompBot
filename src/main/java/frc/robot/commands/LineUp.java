@@ -10,16 +10,16 @@ import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 
-public final class LineUp extends ParallelCommandGroup{
-  public LineUp(DriveSubsystem driveSub, ShooterSubsystem shootSub, LimelightSubsystem limeSub) {
-  addCommands(
-  shootSub.getPosition(),
-  driveSub.driveDistance(limeSub.getV()) //this will probably kill us all i dont know what im doing
-  );
-  }
+// public final class LineUp extends ParallelCommandGroup{
+//   public LineUp(DriveSubsystem driveSub, ShooterSubsystem shootSub, LimelightSubsystem limeSub) {
+//   addCommands(
+//   shootSub.getPosition(),
+//   driveSub.driveDistance(limeSub.getV()) //this will probably kill us all i dont know what im doing
+//   );
+//   }
 
-  /*private void Autos() {
-    throw new UnsupportedOperationException("This is a utility class!");
-  }*/
-  //idk what this is
-}
+//   /*private void Autos() {
+//     throw new UnsupportedOperationException("This is a utility class!");
+//   }*/
+//   //idk what this is
+// }

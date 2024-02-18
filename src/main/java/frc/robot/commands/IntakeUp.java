@@ -37,11 +37,16 @@ public class IntakeUp extends Command {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    m_subsystem.intakeStop();
+  }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    // if(IntakeSubsystem.ringIn = false) {
+    //   return true;
+    // }
+    return false; 
   }
 }
