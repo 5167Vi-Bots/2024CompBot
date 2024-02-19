@@ -101,10 +101,10 @@ public class Constants {
     }
 
     public static class ShooterSubsystemConstants {
-        public static final int ShooterIntakeMotor1ID = 17;
-        public static final String ShooterIntakeMotor1Can = RioCanBus;
-        public static final int ShooterIntakeMotor2ID = 18;
-        public static final String ShooterIntakeMotor2Can = RioCanBus;
+        public static final int FeederMotor1ID = 17;
+        public static final String FeederMotor1Can = RioCanBus;
+        public static final int FeederMotor2ID = 18;
+        public static final String FeederMotor2Can = RioCanBus;
         public static final int ShooterMotor1ID = 11;
         public static final String ShooterMotor1CAN = RioCanBus;
         public static final int ShooterMotor2ID = 12;

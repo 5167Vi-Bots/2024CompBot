@@ -18,17 +18,17 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.HelperClasses.Constants.ShooterSubsystemConstants;
 
 public class ShooterSubsystem extends SubsystemBase {
-  private TalonSRX shooterIntake1, shooterIntake2;
+  private TalonSRX feeder1, feeder2;
   private TalonFX shooter1, shooter2; 
   private Rev2mDistanceSensor distanceSensor;
   /** Creates a new ExampletuneSubsystem. */
   public ShooterSubsystem() {
-    shooterIntake1 = new TalonSRX(ShooterSubsystemConstants.ShooterIntakeMotor1ID);  
-    shooterIntake2 = new TalonSRX(ShooterSubsystemConstants.ShooterIntakeMotor2ID);  
+    feeder1 = new TalonSRX(ShooterSubsystemConstants.FeederMotor1ID);  
+    feeder2 = new TalonSRX(ShooterSubsystemConstants.FeederMotor2ID);  
     shooter1 = new TalonFX(ShooterSubsystemConstants.ShooterMotor1ID, ShooterSubsystemConstants.ShooterMotor1CAN);
     shooter2 = new TalonFX(ShooterSubsystemConstants.ShooterMotor2ID, ShooterSubsystemConstants.ShooterMotor2CAN);
-    shooterIntake1.setNeutralMode(NeutralMode.Coast);
-    shooterIntake2.setNeutralMode(NeutralMode.Coast);
+    feeder1.setNeutralMode(NeutralMode.Coast);
+    feeder2.setNeutralMode(NeutralMode.Coast);
     shooter1.setNeutralMode(NeutralModeValue.Brake);
     shooter2.setNeutralMode(NeutralModeValue.Brake);
     distanceSensor = null;// new Rev2mDistanceSensor(ShooterSubsystemConstants.distanceSensorPort);
@@ -50,15 +50,15 @@ public class ShooterSubsystem extends SubsystemBase {
   }
 
   public void shootForward(){
-    shooterIntake1.set(ControlMode.PercentOutput, 1);
-    shooterIntake2.set(ControlMode.PercentOutput, .75);
+    feeder1.set(ControlMode.PercentOutput, 1);
+    feeder2.set(ControlMode.PercentOutput, .75);
     }
 
   public void shootBack(){
     shooter1.set(-.7);
     shooter2.set(-.7);  
-    shooterIntake1.set(ControlMode.PercentOutput, .5);
-    shooterIntake2.set(ControlMode.PercentOutput, .375);
+    feeder1.set(ControlMode.PercentOutput, .5);
+    feeder2.set(ControlMode.PercentOutput, .375);
   }
 
   public void warmUp(){
@@ -71,8 +71,8 @@ public class ShooterSubsystem extends SubsystemBase {
   }
 
   public void shootStop(){
-    shooterIntake1.set(ControlMode.PercentOutput, 0);
-    shooterIntake2.set(ControlMode.PercentOutput, 0);
+    feeder1.set(ControlMode.PercentOutput, 0);
+    feeder2.set(ControlMode.PercentOutput, 0);
     shooter1.set(0);
     shooter2.set(0);
   }
