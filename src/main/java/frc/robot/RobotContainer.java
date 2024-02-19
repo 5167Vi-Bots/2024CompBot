@@ -69,17 +69,19 @@ public class RobotContainer {
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
     new Trigger(m_exampleSubsystem::exampleCondition)
         .onTrue(new ExampleCommand(m_exampleSubsystem));
-       buttonBoard.button(11).whileTrue(new IntakeUp(intake));
-       buttonBoard.button(12).toggleOnTrue(Commands.parallel( new ShootBack(shooty), new IntakeDown(intake)));
-       
-       buttonBoard.button(8).toggleOnTrue(new AmpIn(amp));
-       buttonBoard.button(7).toggleOnTrue(new AmpOut(amp));
+       buttonBoard.button(11).whileTrue(new IntakeUp(intake)); //intake
+       buttonBoard.button(12).toggleOnTrue(Commands.parallel( new ShootBack(shooty), new IntakeDown(intake))); //full out
+       buttonBoard.button(3).toggleOnTrue(Commands.parallel(new ShootBack(shooty), new IntakeUp(intake))); //hold
 
-       buttonBoard.button(2).toggleOnTrue(new WarmUp(shooty));
-       buttonBoard.button(1).toggleOnTrue(new ShootForward(shooty));
+       buttonBoard.button(8).toggleOnTrue(new AmpIn(amp)); //amp grab
+       buttonBoard.button(7).toggleOnTrue(new AmpOut(amp)); //amp dispense
 
-       buttonBoard.button(6).toggleOnTrue(new ArmsUp(arms));
-       buttonBoard.button(4).toggleOnTrue(new ArmsDown(arms));
+       buttonBoard.button(2).toggleOnTrue(new WarmUp(shooty)); //priming shoot motors
+       buttonBoard.button(1).toggleOnTrue(new ShootForward(shooty)); //feeders on, actually fires
+
+       buttonBoard.button(6).toggleOnTrue(new ArmsUp(arms)); //arms up
+       buttonBoard.button(4).toggleOnTrue(new ArmsDown(arms)); //arms down
+       buttonBoard.button(5).toggleOnTrue(null); //balance
 
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
