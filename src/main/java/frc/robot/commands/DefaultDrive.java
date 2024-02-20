@@ -2,10 +2,10 @@ package frc.robot.commands;
 
 import java.util.function.DoubleSupplier;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.DriveSubsystem;
 
-public class DefaultDrive extends CommandBase {
+public class DefaultDrive extends Command {
     private DriveSubsystem driveSubsystem;
     private DoubleSupplier x, y, z;
 
@@ -21,18 +21,19 @@ public class DefaultDrive extends CommandBase {
 
     @Override
     public void initialize() {
-        driveSubsystem.MoveRobot(0, 0, 0);
+        //driveSubsystem.MoveRobot(0, 0, 0);
     }
 
     @Override
     public void execute() {
         // driveSubsystem.drive(x.getAsDouble()*-speedLimit, SquareInputs(z.getAsDouble() *speedLimit)*-1);
-        driveSubsystem.MoveRobot(x.getAsDouble()*-speedLimit, y.getAsDouble()*-speedLimit, z.getAsDouble()*-speedLimit);
+        System.out.println("The X Axis is " + x.getAsDouble());
+        driveSubsystem.MoveRobot(x.getAsDouble(), y.getAsDouble(), z.getAsDouble());
     }
 
     @Override
     public void end(boolean interrupted) {
-                driveSubsystem.MoveRobot(0, 0, 0);
+                //driveSubsystem.MoveRobot(0, 0, 0);
 
     }
 }

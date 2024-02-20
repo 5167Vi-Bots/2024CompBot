@@ -42,7 +42,6 @@ public class DriveSubsystem extends SwerveDrivetrain implements Subsystem {
           /* one-time action goes here */
         });
   }
-  private double MaxAngularRate = 1.5 * Math.PI; // 3/4 of a rotation per second max angular velocity
 
   /**
    * An example method querying a boolean state of the subsystem (for example, a digital sensor).
@@ -81,6 +80,8 @@ public class DriveSubsystem extends SwerveDrivetrain implements Subsystem {
     private final SwerveRequest.SwerveDriveBrake brake = new SwerveRequest.SwerveDriveBrake();
     private final SwerveRequest.PointWheelsAt point = new SwerveRequest.PointWheelsAt();
     public double MaxSpeed = TunerConstants.kSpeedAt12VoltsMps; // kSpeedAt12VoltsMps desired top speed
+      private double MaxAngularRate = 1.5 * Math.PI; // 3/4 of a rotation per second max angular velocity
+
 
     public DriveSubsystem(SwerveDrivetrainConstants driveTrainConstants, double OdometryUpdateFrequency, SwerveModuleConstants... modules) {
         super(driveTrainConstants, OdometryUpdateFrequency, modules);
@@ -95,10 +96,11 @@ public class DriveSubsystem extends SwerveDrivetrain implements Subsystem {
         }
     }
     private boolean FieldOrentedControl = true;
-  private final SwerveRequest.FieldCentric drive = new SwerveRequest.FieldCentric()
+  private final SwerveRequest.FieldCentric Fielddrive = new SwerveRequest.FieldCentric()
       .withDeadband(MaxSpeed * 0.1).withRotationalDeadband(MaxAngularRate * 0.1) // Add a 10% deadband
       .withDriveRequestType(DriveRequestType.OpenLoopVoltage); // I want field-centric
                                                                // driving in open loop
+
  private final SwerveRequest.RobotCentric Botdrive = new SwerveRequest.RobotCentric()
       .withDeadband(MaxSpeed * 0.1).withRotationalDeadband(MaxAngularRate * 0.1) // Add a 10% deadband
       .withDriveRequestType(DriveRequestType.OpenLoopVoltage); // I want field-centric
@@ -108,8 +110,11 @@ public class DriveSubsystem extends SwerveDrivetrain implements Subsystem {
     public void MoveRobot(double UpDown, double LeftRight, double Rotate)
     {
 
-      if (FieldOrentedControl) {
-              applyRequest(() -> drive.withVelocityX(-UpDown * MaxSpeed) // Drive forward with
+      if (!FieldOrentedControl) {
+        System.out.println("Field Control X: " + UpDown);       
+         System.out.println("MaxSpeed: " + MaxSpeed);
+
+            applyRequest(() -> Fielddrive.withVelocityX(-UpDown * MaxSpeed) // Drive forward with
                                                                                            // negative Y (forward)
             .withVelocityY(-LeftRight * MaxSpeed) // Drive left with negative X (left)
             .withRotationalRate(-Rotate * MaxAngularRate) // Drive counterclockwise with negative X (left)
