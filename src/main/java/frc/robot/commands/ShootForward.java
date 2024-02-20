@@ -4,44 +4,46 @@
 
 package frc.robot.commands;
 
-import frc.robot.subsystems.BottomIntakeSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 
 /** An example command that uses an example subsystem. */
-public class BottomIntakeDown extends Command {
+public class ShootForward extends Command {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final BottomIntakeSubsystem m_subsystem;
+  private final ShooterSubsystem ShooterSubsystem;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
-   * @return 
+   * @return
    */
-  public BottomIntakeDown(BottomIntakeSubsystem subsystem) {
-    m_subsystem = subsystem;
-    
+  public ShootForward(ShooterSubsystem subsystem) {
+    ShooterSubsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
   }
+  
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_subsystem.IntakeDown();
+    ShooterSubsystem.shootForward();
   }
 
-  // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
-
+  public void end(boolean interrupted) {
+    ShooterSubsystem.shootStop();
+  }
   // Returns true when the command should end.
   @Override
+
   public boolean isFinished() {
     return false;
+   }
   }
-}

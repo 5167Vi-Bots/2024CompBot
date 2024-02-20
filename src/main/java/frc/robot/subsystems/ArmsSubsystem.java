@@ -4,48 +4,36 @@
 
 package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix6.hardware.TalonFX;
-import com.ctre.phoenix6.signals.NeutralModeValue;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 //Erin
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.HelperClasses.Constants.ArmsSubsystemConstants;
-import frc.robot.HelperClasses.Constants.TopIntakeSubsystemConstants;
 
 public class ArmsSubsystem extends SubsystemBase { 
-  private TalonFX rightArm, leftArm;
+  private TalonSRX rightArm, leftArm;
   /** Creates a new ExampleSubsystem. */
   public ArmsSubsystem() {
-rightArm = new TalonFX(ArmsSubsystemConstants.RightArmMotorID, ArmsSubsystemConstants.RightArmMotorCan);
-leftArm = new TalonFX(ArmsSubsystemConstants.LeftArmMotorID, ArmsSubsystemConstants.LeftArmMotorCan);  
-rightArm.setNeutralMode(NeutralModeValue.Brake);
-leftArm.setNeutralMode(NeutralModeValue.Brake);
+rightArm = new TalonSRX(ArmsSubsystemConstants.RightArmMotorID);
+leftArm = new TalonSRX(ArmsSubsystemConstants.LeftArmMotorID); 
 }
 
-public void LeftArmStop(){
-   leftArm.set(0);
+public void armsStop(){
+   leftArm.set(ControlMode.PercentOutput, 0);
+   rightArm.set(ControlMode.PercentOutput, 0);
   }
 
-  public void RightArmStop(){
-    rightArm.set(0);
-  }
-
-  public void RightArmUp(){
-    rightArm.set(.5);
+  public void armsUp(){
+    rightArm.set(ControlMode.PercentOutput, .5);
+    leftArm.set(ControlMode.PercentOutput, .5);
   }
   
-  public void RightArmDown(){
-    rightArm.set(-0.5);
-  }
-  
-  public void LeftArmUp(){
-    leftArm.set(.5);
+  public void armsDown(){
+    rightArm.set(ControlMode.PercentOutput, -.5);
+    leftArm.set(ControlMode.PercentOutput, -.5);
   }
 
-  public void LeftArmDown(){
-    leftArm.set(-.5);
-  }
 
   /**
    * Example command factory method.
@@ -63,12 +51,12 @@ public void LeftArmStop(){
 
   public void ExtendArms()
   {
-
+    //may not need to exist
   }
 
   public void RetractArms()
   {
-
+    //may not need to exist
   }
 
   /**

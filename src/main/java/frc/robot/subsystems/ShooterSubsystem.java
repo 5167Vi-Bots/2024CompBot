@@ -3,10 +3,14 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.subsystems;
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix.motorcontrol.VictorSPXControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
+import com.revrobotics.Rev2mDistanceSensor;
 
 //Caleb
 import edu.wpi.first.wpilibj2.command.Command;
@@ -14,18 +18,20 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.HelperClasses.Constants.ShooterSubsystemConstants;
 
 public class ShooterSubsystem extends SubsystemBase {
-  private VictorSPX shooterIntake1, shooterIntake2;
+  private TalonSRX feeder1, feeder2;
   private TalonFX shooter1, shooter2; 
-  /** Creates a new ExampleSubsystem. */
+  private Rev2mDistanceSensor distanceSensor;
+  /** Creates a new ExampletuneSubsystem. */
   public ShooterSubsystem() {
-    shooterIntake1 = new VictorSPX(ShooterSubsystemConstants.ShooterIntakeMotor1ID);  
-    shooterIntake2 = new VictorSPX(ShooterSubsystemConstants.ShooterIntakeMotor2ID);  
+    feeder1 = new TalonSRX(ShooterSubsystemConstants.FeederMotor1ID);  
+    feeder2 = new TalonSRX(ShooterSubsystemConstants.FeederMotor2ID);  
     shooter1 = new TalonFX(ShooterSubsystemConstants.ShooterMotor1ID, ShooterSubsystemConstants.ShooterMotor1CAN);
     shooter2 = new TalonFX(ShooterSubsystemConstants.ShooterMotor2ID, ShooterSubsystemConstants.ShooterMotor2CAN);
-    shooterIntake1.setNeutralMode(NeutralMode.Brake);
-    shooterIntake2.setNeutralMode(NeutralMode.Brake);
+    feeder1.setNeutralMode(NeutralMode.Coast);
+    feeder2.setNeutralMode(NeutralMode.Coast);
     shooter1.setNeutralMode(NeutralModeValue.Brake);
     shooter2.setNeutralMode(NeutralModeValue.Brake);
+    distanceSensor = null;// new Rev2mDistanceSensor(ShooterSubsystemConstants.distanceSensorPort);
   }
 
 
@@ -42,6 +48,52 @@ public class ShooterSubsystem extends SubsystemBase {
           /* one-time action goes here */
         });
   }
+
+  public void shootForward(){
+    feeder1.set(ControlMode.PercentOutput, 1);
+    feeder2.set(ControlMode.PercentOutput, .75);
+    }
+
+  public void shootBack(){
+    shooter1.set(-.2);
+    shooter2.set(-.2);  
+    feeder1.set(ControlMode.PercentOutput, -.2);
+    feeder2.set(ControlMode.PercentOutput, -.2);
+  }
+
+  public void warmUp(){
+    shooter1.set(1);
+    shooter2.set(1);
+  }
+
+  public void warmDown(){
+    //a memorial
+  }
+
+  public void shootStop(){
+    feeder1.set(ControlMode.PercentOutput, 0);
+    feeder2.set(ControlMode.PercentOutput, 0);
+    shooter1.set(0);
+    shooter2.set(0);
+  }
+
+  public void getPosition(){
+    //use limelight to find our position
+  }
+
+  /*public double getDistance(){
+    return distanceSensor.GetRange();
+  }
+
+  //TODO test and correct value
+  public boolean ringIn(){
+    if (distanceSensor.GetRange() < 100){
+      return true; 
+    } else {
+      return false; 
+    }
+  }*/
+
 
   /**
    * An example method querying a boolean state of the subsystem (for example, a digital sensor).
@@ -62,4 +114,5 @@ public class ShooterSubsystem extends SubsystemBase {
   public void simulationPeriodic() {
     // This method will be called once per scheduler run during simulation
   }
+
 }

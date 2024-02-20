@@ -5,8 +5,28 @@
 package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
-import frc.robot.commands.Autos;
+import frc.robot.HelperClasses.Constants.ControllerPorts;
+import frc.robot.commands.AmpIn;
+import frc.robot.commands.AmpOut;
+import frc.robot.commands.ArmsDown;
+import frc.robot.commands.ArmsUp;
+import frc.robot.commands.BadAuto;
+import frc.robot.commands.IntakeDown;
+import frc.robot.commands.IntakeHold;
+import frc.robot.commands.IntakeUp;
+import frc.robot.commands.ShootForward;
+import frc.robot.commands.WarmUp;
+import frc.robot.commands.ShootBack;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.subsystems.AmpSubsystem;
+import frc.robot.subsystems.ArmsSubsystem;
+import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.LightsSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
+import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
@@ -29,12 +49,19 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  * subsystems, commands, and trigger mappings) should be declared here.
  */
 public class RobotContainer {
+  private final CommandXboxController driverController = new CommandXboxController(ControllerPorts.kDriverControllerPort);
+  private final CommandJoystick buttonBoard = new CommandJoystick(ControllerPorts.kOperatorControllerPort);
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
 
+  ArmsSubsystem arms = new ArmsSubsystem();
+  DriveSubsystem drive = new DriveSubsystem();
+  LightsSubsystem lights = new LightsSubsystem();
+  ShooterSubsystem shooty = new ShooterSubsystem();
+  AmpSubsystem amp = new AmpSubsystem();
+  IntakeSubsystem intake = new IntakeSubsystem();
+
   // Replace with CommandPS4Controller or CommandJoystick if needed
-  private final CommandXboxController m_driverController =
-      new CommandXboxController(OperatorConstants.kDriverControllerPort);
 
 	
 
@@ -63,19 +90,20 @@ public class RobotContainer {
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
     new Trigger(m_exampleSubsystem::exampleCondition)
         .onTrue(new ExampleCommand(m_exampleSubsystem));
+       buttonBoard.button(11).whileTrue(new IntakeUp(intake)); //intake
+       buttonBoard.button(12).toggleOnTrue(Commands.parallel( new ShootBack(shooty), new IntakeDown(intake))); //full out
+       buttonBoard.button(3).toggleOnTrue(Commands.parallel(new ShootBack(shooty), new IntakeHold(intake))); //hold
 
-	// drivetrain.setDefaultCommand( // Drivetrain will execute this command periodically
-  //       drivetrain.applyRequest(() -> drive.withVelocityX(-joystick.getLeftY() * MaxSpeed) // Drive forward with
-  //                                                                                          // negative Y (forward)
-  //           .withVelocityY(-joystick.getLeftX() * MaxSpeed) // Drive left with negative X (left)
-  //           .withRotationalRate(-joystick.getRightX() * MaxAngularRate) // Drive counterclockwise with negative X (left)
-  //       ));
+       buttonBoard.button(8).whileTrue(new AmpIn(amp)); //amp grab
+       buttonBoard.button(7).whileTrue(new AmpOut(amp)); //amp dispense
 
-  //   joystick.a().whileTrue(drivetrain.applyRequest(() -> brake));
-  //   joystick.b().whileTrue(drivetrain
-  //       .applyRequest(() -> point.withModuleDirection(new Rotation2d(-joystick.getLeftY(), -joystick.getLeftX()))));
+       buttonBoard.button(2).toggleOnTrue(new WarmUp(shooty)); //priming shoot motors
+       buttonBoard.button(1).toggleOnTrue(new ShootForward(shooty)); //feeders on, actually fires
 
-    // reset the field-centric heading on left bumper press
+       buttonBoard.button(6).toggleOnTrue(new ArmsUp(arms)); //arms up
+       buttonBoard.button(4).toggleOnTrue(new ArmsDown(arms)); //arms down
+       //buttonBoard.button(5).toggleOnTrue(null); balance
+
     joystick.leftBumper().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldRelative()));
 
     if (Utils.isSimulation()) {
@@ -84,14 +112,15 @@ public class RobotContainer {
     drivetrain.registerTelemetry(logger::telemeterize);
 	
   }
+  
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
    *
    * @return the command to run in autonomous
    */
-  public Command getAutonomousCommand() {
+  /*public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    return Autos.exampleAuto(m_exampleSubsystem);
-  }
+    return BadAuto.BadAuto(m_exampleSubsystem); //help i dont know how to fix this grahggrhiaushdnakwjlnfgilajksfdnkjse,ngaiwlsekj,ndfkajsdfmnaskjdfnasdkjfn
+  }*/
 }

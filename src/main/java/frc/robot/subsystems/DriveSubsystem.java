@@ -21,10 +21,13 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.HelperClasses.Constants;
+
 import frc.robot.generated.TunerConstants;
 
 public class DriveSubsystem extends SwerveDrivetrain implements Subsystem {
 
+
+  
 
   /**
    * Example command factory method.
@@ -47,29 +50,30 @@ public class DriveSubsystem extends SwerveDrivetrain implements Subsystem {
    * @return value of some boolean subsystem state, such as a digital sensor.
    */
   public double getPitch() {
-    return Pigeon.getPitch();
+    return 0;//Pigeon.getPitch().getValue();
   }
 
   public double getRoll() {
-    return Pigeon.getRoll();
+    return 0;//Pigeon.getRoll().getValue();
   }
 
   public double getYaw() {
-    return Pigeon.getYaw();
+    return 0;//Pigeon.getYaw().getValue();
   }
+
+
 
   @Override
   public void periodic() {
-    SmartDashboard.putNumber("Pitch", getPitch());
-    SmartDashboard.putNumber("Roll", getRoll());
-    SmartDashboard.putNumber("Yaw", getYaw());
+    //SmartDashboard.putNumber("Pitch", getPitch());
+    //SmartDashboard.putNumber("Roll", getRoll());
+    //SmartDashboard.putNumber("Yaw", getYaw());
   }
 
   @Override
   public void simulationPeriodic() {
     // This method will be called once per scheduler run during simulation
   }
-  
   
     private static final double kSimLoopPeriod = 0.005; // 5 ms
     private Notifier m_simNotifier = null;

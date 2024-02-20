@@ -4,20 +4,27 @@
 
 package frc.robot.commands;
 
-import frc.robot.subsystems.ArmsSubsystem;
+import frc.robot.HelperClasses.Constants.LightsSubsystemConstants;
+import frc.robot.subsystems.LightsSubsystem;
+import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.Command;
 
 /** An example command that uses an example subsystem. */
-public class HangCommand extends Command {
+public class BaseLightCommand extends Command {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final ArmsSubsystem m_subsystem;
+  private final LightsSubsystem m_subsystem;
+  private Color setColor = LightsSubsystemConstants.Orange;
 
+  public Color GetColor()
+  {
+    return LightsSubsystemConstants.Orange;
+  }
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public HangCommand(ArmsSubsystem subsystem) {
+  public BaseLightCommand(LightsSubsystem subsystem) {
     m_subsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
@@ -25,7 +32,9 @@ public class HangCommand extends Command {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    m_subsystem.setOrange();
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
