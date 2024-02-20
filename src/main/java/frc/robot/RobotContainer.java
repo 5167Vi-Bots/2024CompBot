@@ -56,7 +56,7 @@ public class RobotContainer {
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
 
   ArmsSubsystem arms = new ArmsSubsystem();
-  DriveSubsystem drive = new DriveSubsystem();
+  DriveSubsystem drive = TunerConstants.DriveTrain;
   LightsSubsystem lights = new LightsSubsystem();
   ShooterSubsystem shooty = new ShooterSubsystem();
   AmpSubsystem amp = new AmpSubsystem();
