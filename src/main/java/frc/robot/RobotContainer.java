@@ -12,6 +12,7 @@ import frc.robot.commands.ArmsDown;
 import frc.robot.commands.ArmsUp;
 import frc.robot.commands.BadAuto;
 import frc.robot.commands.IntakeDown;
+import frc.robot.commands.IntakeHold;
 import frc.robot.commands.IntakeUp;
 import frc.robot.commands.ShootForward;
 import frc.robot.commands.WarmUp;
@@ -71,17 +72,17 @@ public class RobotContainer {
         .onTrue(new ExampleCommand(m_exampleSubsystem));
        buttonBoard.button(11).whileTrue(new IntakeUp(intake)); //intake
        buttonBoard.button(12).toggleOnTrue(Commands.parallel( new ShootBack(shooty), new IntakeDown(intake))); //full out
-       buttonBoard.button(3).toggleOnTrue(Commands.parallel(new ShootBack(shooty), new IntakeUp(intake))); //hold
+       buttonBoard.button(3).toggleOnTrue(Commands.parallel(new ShootBack(shooty), new IntakeHold(intake))); //hold
 
-       buttonBoard.button(8).toggleOnTrue(new AmpIn(amp)); //amp grab
-       buttonBoard.button(7).toggleOnTrue(new AmpOut(amp)); //amp dispense
+       buttonBoard.button(8).whileTrue(new AmpIn(amp)); //amp grab
+       buttonBoard.button(7).whileTrue(new AmpOut(amp)); //amp dispense
 
        buttonBoard.button(2).toggleOnTrue(new WarmUp(shooty)); //priming shoot motors
        buttonBoard.button(1).toggleOnTrue(new ShootForward(shooty)); //feeders on, actually fires
 
        buttonBoard.button(6).toggleOnTrue(new ArmsUp(arms)); //arms up
        buttonBoard.button(4).toggleOnTrue(new ArmsDown(arms)); //arms down
-       buttonBoard.button(5).toggleOnTrue(null); //balance
+       //buttonBoard.button(5).toggleOnTrue(null); balance
 
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.

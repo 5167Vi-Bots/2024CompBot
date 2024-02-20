@@ -55,10 +55,10 @@ public class ShooterSubsystem extends SubsystemBase {
     }
 
   public void shootBack(){
-    shooter1.set(-.7);
-    shooter2.set(-.7);  
-    feeder1.set(ControlMode.PercentOutput, .5);
-    feeder2.set(ControlMode.PercentOutput, .375);
+    shooter1.set(-.2);
+    shooter2.set(-.2);  
+    feeder1.set(ControlMode.PercentOutput, -.2);
+    feeder2.set(ControlMode.PercentOutput, -.2);
   }
 
   public void warmUp(){
@@ -81,7 +81,7 @@ public class ShooterSubsystem extends SubsystemBase {
     //use limelight to find our position
   }
 
-  public double getDistance(){
+  /*public double getDistance(){
     return distanceSensor.GetRange();
   }
 
@@ -92,7 +92,7 @@ public class ShooterSubsystem extends SubsystemBase {
     } else {
       return false; 
     }
-  }
+  }*/
 
 
   /**

@@ -9,7 +9,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix6.hardware.TalonFX;
-import com.revrobotics.Rev2mDistanceSensor;
+//import com.revrobotics.Rev2mDistanceSensor;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -19,14 +19,14 @@ import frc.robot.HelperClasses.Constants.ShooterSubsystemConstants;
 public class IntakeSubsystem extends SubsystemBase {
 /** Creates a new ExampleSubsystem. */
   private TalonFX intake1, intake2;
-  private Rev2mDistanceSensor distanceSensor;
+  //private Rev2mDistanceSensor distanceSensor;
   
   public IntakeSubsystem() {
     intake1 = new TalonFX(IntakeSubsystemConstants.IntakeMotor1ID); //1
     intake2 = new TalonFX(IntakeSubsystemConstants.IntakeMotor2ID); //2
     //intake1.setNeutralMode(NeutralMode.Brake);
     //intake2.setNeutralMode(NeutralMode.Brake);
-    distanceSensor = new Rev2mDistanceSensor(ShooterSubsystemConstants.distanceSensorPort);
+    //distanceSensor = new Rev2mDistanceSensor(ShooterSubsystemConstants.distanceSensorPort);
   }
 
   
@@ -45,8 +45,13 @@ public class IntakeSubsystem extends SubsystemBase {
   }
 
   public void intakeUp() {
-   intake1.set(-.7);
+   intake1.set(-.4);
    intake2.set( -.7);  }
+
+  public void intakeHold() {
+    intake1.set(-.2);
+    intake2.set(-.2);
+  }
 
   public void intakeDown() {
    intake1.set(.4);
@@ -58,7 +63,7 @@ public class IntakeSubsystem extends SubsystemBase {
    intake2.set(0);    
   }
 
-  public boolean ringIn(){
+  /*public boolean ringIn(){
     if (distanceSensor == null)
       return false;
     if (distanceSensor.GetRange() < 100){
@@ -69,7 +74,7 @@ public class IntakeSubsystem extends SubsystemBase {
       //run IntakeStop
     }
   }
-  
+  */
 
   /**
    * An example method querying a boolean state of the subsystem (for example, a digital sensor).

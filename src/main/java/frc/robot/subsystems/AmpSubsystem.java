@@ -14,12 +14,17 @@ public class AmpSubsystem extends SubsystemBase {
     }
 
     public void ampOut(){
-        ampMotor1.set(ControlMode.PercentOutput, 1);
-        ampMotor2.set(ControlMode.PercentOutput, 1);
+        ampMotor1.set(ControlMode.PercentOutput, .5);
+        ampMotor2.set(ControlMode.PercentOutput, .5);
     }
      public void ampIn(){
-        ampMotor1.set(ControlMode.PercentOutput, -.75);
-        ampMotor1.set(ControlMode.PercentOutput, -.75);
+        ampMotor1.set(ControlMode.PercentOutput, -.25);
+        ampMotor2.set(ControlMode.PercentOutput, -.25);
+    }
+
+    public void ampStop(){
+        ampMotor1.set(ControlMode.PercentOutput, 0);
+        ampMotor2.set(ControlMode.PercentOutput, 0);
     }
 
 // test these later and make them accurate
