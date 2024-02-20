@@ -117,16 +117,16 @@ public class RobotContainer {
 
     joystick.leftBumper().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldRelative()));
 
-    //drive.setDefaultCommand(new DefaultDrive( drive, () -> joystick.getLeftX(),  () -> joystick.getLeftY(),  () -> joystick.getRightX(), 1));
+    drive.setDefaultCommand(new DefaultDrive( drive, () -> joystick.getLeftX(),  () -> joystick.getLeftY(),  () -> joystick.getRightX(), 1));
 
-    drivetrain.setDefaultCommand( // Drivetrain will execute this command periodically
-    drivetrain.applyRequest(() -> robotCentricDrive.withVelocityX(-joystick.getLeftY() * MaxSpeed) // Drive forward with
-                                                                                       // negative Y (forward)
-        .withVelocityY(-joystick.getLeftX() * MaxSpeed) // Drive left with negative X (left)
-        //.withRotationalRate(0) // Drive counterclockwise with negative X (left)
-        .withRotationalRate(-joystick.getRightX() * MaxAngularRate) // Drive counterclockwise with negative X (left)
+    // drivetrain.setDefaultCommand( // Drivetrain will execute this command periodically
+    // drivetrain.applyRequest(() -> robotCentricDrive.withVelocityX(-joystick.getLeftY() * MaxSpeed) // Drive forward with
+    //                                                                                    // negative Y (forward)
+    //     .withVelocityY(-joystick.getLeftX() * MaxSpeed) // Drive left with negative X (left)
+    //     //.withRotationalRate(0) // Drive counterclockwise with negative X (left)
+    //     .withRotationalRate(-joystick.getRightX() * MaxAngularRate) // Drive counterclockwise with negative X (left)
 
-    ));
+    // ));
 
 
 
