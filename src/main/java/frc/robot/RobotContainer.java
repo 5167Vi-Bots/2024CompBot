@@ -11,6 +11,7 @@ import frc.robot.commands.AmpOut;
 import frc.robot.commands.ArmsDown;
 import frc.robot.commands.ArmsUp;
 import frc.robot.commands.BadAuto;
+import frc.robot.commands.DefaultDrive;
 import frc.robot.commands.IntakeDown;
 import frc.robot.commands.IntakeHold;
 import frc.robot.commands.IntakeUp;
@@ -105,6 +106,8 @@ public class RobotContainer {
        //buttonBoard.button(5).toggleOnTrue(null); balance
 
     joystick.leftBumper().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldRelative()));
+
+    drive.setDefaultCommand(new DefaultDrive( drive, () -> joystick.getLeftX(),  () -> joystick.getLeftY(),  () -> joystick.getRightX(), 1));
 
     if (Utils.isSimulation()) {
       drivetrain.seedFieldRelative(new Pose2d(new Translation2d(), Rotation2d.fromDegrees(90)));
