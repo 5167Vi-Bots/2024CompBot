@@ -127,11 +127,12 @@ public void setPosition(int position) {
         System.out.println("Field Control X: " + UpDown);       
          System.out.println("MaxSpeed: " + MaxSpeed);
 
-            applyRequest(() -> Fielddrive.withVelocityX(-UpDown * MaxSpeed) // Drive forward with
+         this.setControl(Fielddrive.withVelocityX(-UpDown * MaxSpeed) // Drive forward with
                                                                                            // negative Y (forward)
             .withVelocityY(-LeftRight * MaxSpeed) // Drive left with negative X (left)
             .withRotationalRate(-Rotate * MaxAngularRate) // Drive counterclockwise with negative X (left)
-        );
+            );
+
       }
       else
       {
@@ -140,7 +141,7 @@ public void setPosition(int position) {
     }
 
     public void RobotDrive(double UpDown, double LeftRight, double Rotate) {
-                applyRequest(() -> Botdrive.withVelocityX(-UpDown * MaxSpeed) // Drive forward with
+                this.setControl(Botdrive.withVelocityX(-UpDown * MaxSpeed) // Drive forward with
                                                                                            // negative Y (forward)
             .withVelocityY(-LeftRight * MaxSpeed) // Drive left with negative X (left)
             .withRotationalRate(-Rotate * MaxAngularRate) // Drive counterclockwise with negative X (left)
