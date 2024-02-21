@@ -123,9 +123,7 @@ public void setPosition(int position) {
     public void MoveRobot(double UpDown, double LeftRight, double Rotate)
     {
 
-      if (!FieldOrentedControl) {
-        System.out.println("Field Control X: " + UpDown);       
-         System.out.println("MaxSpeed: " + MaxSpeed);
+      if (FieldOrentedControl) {
 
          this.setControl(Fielddrive.withVelocityX(-UpDown * MaxSpeed) // Drive forward with
                                                                                            // negative Y (forward)

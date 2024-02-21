@@ -25,19 +25,25 @@ public class AlignBotWithApriltag extends Command {
     public void execute() {
     LimelightResults llresults =  LimelightHelpers.getLatestResults("limelight-back");
     
-    double kPx = .3;
+    double kPx = .025;
 
-    double kPy = .3;
+    double kPy = .025;
 
+    if (llresults.targetingResults.targets_Fiducials.length > 0)
+    {
     double xErrorRate=llresults.targetingResults.targets_Fiducials[0].tx; 
-    double yErrorRate=0;
+    double yErrorRate=llresults.targetingResults.targets_Fiducials[0].ty;
+System.out.println("xErrorRate: " + xErrorRate);
+System.out.println("yErrorRate: " + yErrorRate);
 
-    drive.MoveRobot(0, kPx*xErrorRate, 0);
+    drive.MoveRobot(-yErrorRate*kPy, -kPx*xErrorRate, 0);
 
     Pose2d bc = llresults.targetingResults.getBotPose2d();
     
     SmartDashboard.putNumber("LL PoseX", bc.getX());
     SmartDashboard.putNumber("LL PoseY", bc.getY());
+    }
+
     }
   
     // Called once the command ends or is interrupted.

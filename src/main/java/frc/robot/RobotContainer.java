@@ -6,6 +6,7 @@ package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.HelperClasses.Constants.ControllerPorts;
+import frc.robot.commands.AlignBotWithApriltag;
 import frc.robot.commands.AmpIn;
 import frc.robot.commands.AmpOut;
 import frc.robot.commands.ArmsDown;
@@ -104,7 +105,7 @@ public class RobotContainer {
        buttonBoard.button(3).toggleOnTrue(Commands.parallel(new ShootBack(shooty), new IntakeHold(intake))); //hold
 
        buttonBoard.button(8).whileTrue(new AmpIn(amp)); //amp grab       buttonBoard.button(8).whileTrue(new AmpIn(amp)); //amp grab
-       joystick.a().whileTrue(new AmpIn(amp)); //amp grab
+       //joystick.a().whileTrue(new AmpIn(amp)); //amp grab
 
        buttonBoard.button(7).whileTrue(new AmpOut(amp)); //amp dispense
 
@@ -117,6 +118,8 @@ public class RobotContainer {
 
     joystick.leftBumper().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldRelative()));
 
+    joystick.a().whileTrue(new AlignBotWithApriltag(drive));
+    
     drive.setDefaultCommand(new DefaultDrive( drive, () -> joystick.getLeftX(),  () -> joystick.getLeftY(),  () -> joystick.getRightX(), 1));
 
     // drivetrain.setDefaultCommand( // Drivetrain will execute this command periodically
