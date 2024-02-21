@@ -52,6 +52,8 @@ public class ShooterSubsystem extends SubsystemBase {
   public void shootForward(){
     feeder1.set(ControlMode.PercentOutput, 1);
     feeder2.set(ControlMode.PercentOutput, .75);
+    shooter1.set(1);
+    shooter2.set(1);
     }
 
   public void shootBack(){

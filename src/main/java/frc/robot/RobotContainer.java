@@ -108,8 +108,8 @@ public class RobotContainer {
 
        buttonBoard.button(7).whileTrue(new AmpOut(amp)); //amp dispense
 
-       buttonBoard.button(2).toggleOnTrue(new WarmUp(shooty)); //priming shoot motors
-       buttonBoard.button(1).toggleOnTrue(new ShootForward(shooty)); //feeders on, actually fires
+       buttonBoard.button(2).whileTrue(new WarmUp(shooty)); //priming shoot motors
+       buttonBoard.button(1).whileTrue(new ShootForward(shooty)); //feeders on, actually fires
 
        buttonBoard.button(6).toggleOnTrue(new ArmsUp(arms)); //arms up
        buttonBoard.button(4).toggleOnTrue(new ArmsDown(arms)); //arms down

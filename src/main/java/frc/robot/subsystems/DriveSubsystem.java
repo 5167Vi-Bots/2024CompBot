@@ -7,6 +7,7 @@ package frc.robot.subsystems;
 import java.io.FileReader;
 import java.util.function.Supplier;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix6.Utils;
 import com.ctre.phoenix6.mechanisms.swerve.SwerveDrivetrain;
 import com.ctre.phoenix6.mechanisms.swerve.SwerveDrivetrainConstants;
@@ -60,7 +61,18 @@ public class DriveSubsystem extends SwerveDrivetrain implements Subsystem {
     return 0;//Pigeon.getYaw().getValue();
   }
 
+public void setPosition(int position) {
+      RobotDrive(100, 0, 0);
+    }
 
+    // public double getPosition() {
+    //     return (frontLeft.getSelectedSensorPosition() + frontRight.getSelectedSensorPosition()) / 2;
+    // }
+
+//   public void driveForward(int inches) {
+//     int position = inches * ticksPerInch;
+//     setPosition(position);
+// }
 
   @Override
   public void periodic() {
@@ -95,7 +107,8 @@ public class DriveSubsystem extends SwerveDrivetrain implements Subsystem {
             startSimThread();
         }
     }
-    private boolean FieldOrentedControl = true;
+  private boolean FieldOrentedControl = true;
+
   private final SwerveRequest.FieldCentric Fielddrive = new SwerveRequest.FieldCentric()
       .withDeadband(MaxSpeed * 0.1).withRotationalDeadband(MaxAngularRate * 0.1) // Add a 10% deadband
       .withDriveRequestType(DriveRequestType.OpenLoopVoltage); // I want field-centric
