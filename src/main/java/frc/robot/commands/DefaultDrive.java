@@ -21,19 +21,19 @@ public class DefaultDrive extends Command {
 
     @Override
     public void initialize() {
-        //driveSubsystem.MoveRobot(0, 0, 0);
+        driveSubsystem.MoveRobot(0, 0, 0);
     }
 
     @Override
     public void execute() {
         // driveSubsystem.drive(x.getAsDouble()*-speedLimit, SquareInputs(z.getAsDouble() *speedLimit)*-1);
-        System.out.println("The X Axis is " + x.getAsDouble());
+        //System.out.println("The X Axis is " + x.getAsDouble());
         driveSubsystem.MoveRobot(x.getAsDouble(), y.getAsDouble(), z.getAsDouble());
     }
 
     @Override
     public void end(boolean interrupted) {
-                //driveSubsystem.MoveRobot(0, 0, 0);
+                driveSubsystem.MoveRobot(0, 0, 0);
 
     }
 }

@@ -20,6 +20,7 @@ import frc.robot.commands.ShootForward;
 import frc.robot.commands.WarmUp;
 import frc.robot.commands.ShootBack;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.FieldCentricSwitch;
 import frc.robot.subsystems.AmpSubsystem;
 import frc.robot.subsystems.ArmsSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
@@ -117,10 +118,11 @@ public class RobotContainer {
        //buttonBoard.button(5).toggleOnTrue(null); balance
 
     joystick.leftBumper().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldRelative()));
+    joystick.rightBumper().onTrue(new FieldCentricSwitch(drive));
 
     joystick.a().whileTrue(new AlignBotWithApriltag(drive));
-    
-    drive.setDefaultCommand(new DefaultDrive( drive, () -> joystick.getLeftX(),  () -> joystick.getLeftY(),  () -> joystick.getRightX(), 1));
+    joystick.y().whileTrue(new FieldCentricSwitch(drive));
+    drive.setDefaultCommand(new DefaultDrive( drive, () -> joystick.getLeftY(),  () -> joystick.getLeftX(),  () -> joystick.getRightX(), 1));
 
     // drivetrain.setDefaultCommand( // Drivetrain will execute this command periodically
     // drivetrain.applyRequest(() -> robotCentricDrive.withVelocityX(-joystick.getLeftY() * MaxSpeed) // Drive forward with

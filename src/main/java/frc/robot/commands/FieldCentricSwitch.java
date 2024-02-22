@@ -31,6 +31,7 @@ public class FieldCentricSwitch extends Command {
     //switch to a field-centric drive
     //use the toggle devyn made (its in new ctr swerve)
     //this will mostly be for auton
+    driveSubsystem.SwitchBetweenFieldAndRobotOriented();
   }
 
   // Called once the command ends or is interrupted.
@@ -40,6 +41,6 @@ public class FieldCentricSwitch extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return true;
   }
 }

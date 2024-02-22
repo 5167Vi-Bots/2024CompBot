@@ -18,17 +18,16 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.HelperClasses.Constants.ShooterSubsystemConstants;
 
 public class ShooterSubsystem extends SubsystemBase {
-  private TalonSRX feeder1, feeder2;
-  private TalonFX shooter1, shooter2; 
+  private TalonFX shooter1, shooter2, feeder1, feeder2; 
   private Rev2mDistanceSensor distanceSensor;
   /** Creates a new ExampletuneSubsystem. */
   public ShooterSubsystem() {
-    feeder1 = new TalonSRX(ShooterSubsystemConstants.FeederMotor1ID);  
-    feeder2 = new TalonSRX(ShooterSubsystemConstants.FeederMotor2ID);  
+    feeder1 = new TalonFX(ShooterSubsystemConstants.FeederMotor1ID);  
+    feeder2 = new TalonFX(ShooterSubsystemConstants.FeederMotor2ID);  
     shooter1 = new TalonFX(ShooterSubsystemConstants.ShooterMotor1ID, ShooterSubsystemConstants.ShooterMotor1CAN);
     shooter2 = new TalonFX(ShooterSubsystemConstants.ShooterMotor2ID, ShooterSubsystemConstants.ShooterMotor2CAN);
-    feeder1.setNeutralMode(NeutralMode.Coast);
-    feeder2.setNeutralMode(NeutralMode.Coast);
+    feeder1.setNeutralMode(NeutralModeValue.Coast);
+    feeder2.setNeutralMode(NeutralModeValue.Coast);
     shooter1.setNeutralMode(NeutralModeValue.Brake);
     shooter2.setNeutralMode(NeutralModeValue.Brake);
     distanceSensor = null;// new Rev2mDistanceSensor(ShooterSubsystemConstants.distanceSensorPort);
@@ -50,8 +49,8 @@ public class ShooterSubsystem extends SubsystemBase {
   }
 
   public void shootForward(){
-    feeder1.set(ControlMode.PercentOutput, 1);
-    feeder2.set(ControlMode.PercentOutput, .75);
+    feeder1.set(1);
+    feeder2.set(.75);
     shooter1.set(1);
     shooter2.set(1);
     }
@@ -59,8 +58,8 @@ public class ShooterSubsystem extends SubsystemBase {
   public void shootBack(){
     shooter1.set(-.2);
     shooter2.set(-.2);  
-    feeder1.set(ControlMode.PercentOutput, -.2);
-    feeder2.set(ControlMode.PercentOutput, -.2);
+    feeder1.set(-.2);
+    feeder2.set(-.2);
   }
 
   public void warmUp(){
@@ -73,8 +72,8 @@ public class ShooterSubsystem extends SubsystemBase {
   }
 
   public void shootStop(){
-    feeder1.set(ControlMode.PercentOutput, 0);
-    feeder2.set(ControlMode.PercentOutput, 0);
+    feeder1.set(0);
+    feeder2.set(0);
     shooter1.set(0);
     shooter2.set(0);
   }
