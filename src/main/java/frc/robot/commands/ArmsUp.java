@@ -35,7 +35,9 @@ public class ArmsUp extends Command {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    ArmsSubsystem.armsStop();
+  }
 
   // Returns true when the command should end.
   @Override

@@ -105,16 +105,15 @@ public class RobotContainer {
        buttonBoard.button(12).toggleOnTrue(Commands.parallel( new ShootBack(shooty), new IntakeDown(intake))); //full out
        buttonBoard.button(3).toggleOnTrue(Commands.parallel(new ShootBack(shooty), new IntakeHold(intake))); //hold
 
-       buttonBoard.button(8).whileTrue(new AmpIn(amp)); //amp grab       buttonBoard.button(8).whileTrue(new AmpIn(amp)); //amp grab
-       //joystick.a().whileTrue(new AmpIn(amp)); //amp grab
+       buttonBoard.button(8).whileTrue(new AmpIn(amp)); //amp grab      
 
        buttonBoard.button(7).whileTrue(new AmpOut(amp)); //amp dispense
 
        buttonBoard.button(2).whileTrue(new WarmUp(shooty)); //priming shoot motors
        buttonBoard.button(1).whileTrue(new ShootForward(shooty)); //feeders on, actually fires
 
-       buttonBoard.button(6).toggleOnTrue(new ArmsUp(arms)); //arms up
-       buttonBoard.button(4).toggleOnTrue(new ArmsDown(arms)); //arms down
+       buttonBoard.button(6).whileTrue(new ArmsUp(arms)); //arms up
+       buttonBoard.button(4).whileTrue(new ArmsDown(arms)); //arms down
        //buttonBoard.button(5).toggleOnTrue(null); balance
 
     joystick.leftBumper().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldRelative()));

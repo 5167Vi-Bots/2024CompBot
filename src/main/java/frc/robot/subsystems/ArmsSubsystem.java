@@ -4,7 +4,8 @@
 
 package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix6.controls.DutyCycleOut;
+import com.ctre.phoenix6.hardware.TalonFX;
 
 //Erin
 import edu.wpi.first.wpilibj2.command.Command;
@@ -12,26 +13,26 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.HelperClasses.Constants.ArmsSubsystemConstants;
 
 public class ArmsSubsystem extends SubsystemBase { 
-  private TalonSRX rightArm, leftArm;
+  private TalonFX rightArm, leftArm;
   /** Creates a new ExampleSubsystem. */
   public ArmsSubsystem() {
-rightArm = new TalonSRX(ArmsSubsystemConstants.RightArmMotorID);
-leftArm = new TalonSRX(ArmsSubsystemConstants.LeftArmMotorID); 
+rightArm = new TalonFX(ArmsSubsystemConstants.RightArmMotorID);
+leftArm = new TalonFX(ArmsSubsystemConstants.LeftArmMotorID); 
 }
 
 public void armsStop(){
-   leftArm.set(ControlMode.PercentOutput, 0);
-   rightArm.set(ControlMode.PercentOutput, 0);
+   leftArm.setControl(new DutyCycleOut(0));
+   rightArm.setControl(new DutyCycleOut(0));
   }
 
   public void armsUp(){
-    rightArm.set(ControlMode.PercentOutput, .5);
-    leftArm.set(ControlMode.PercentOutput, .5);
+    rightArm.setControl(new DutyCycleOut(-0.1));
+    leftArm.setControl(new DutyCycleOut(0.1));
   }
   
   public void armsDown(){
-    rightArm.set(ControlMode.PercentOutput, -.5);
-    leftArm.set(ControlMode.PercentOutput, -.5);
+    rightArm.setControl(new DutyCycleOut(0.1));
+    leftArm.setControl(new DutyCycleOut(-0.1));
   }
 
 
