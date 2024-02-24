@@ -16,7 +16,9 @@ import frc.robot.commands.DefaultDrive;
 import frc.robot.commands.IntakeDown;
 import frc.robot.commands.IntakeHold;
 import frc.robot.commands.IntakeUp;
+import frc.robot.commands.RotateCommand;
 import frc.robot.commands.ShootForward;
+import frc.robot.commands.StrafeCommand;
 import frc.robot.commands.WarmUp;
 import frc.robot.commands.ShootBack;
 import frc.robot.commands.ExampleCommand;
@@ -116,8 +118,15 @@ public class RobotContainer {
        buttonBoard.button(4).whileTrue(new ArmsDown(arms)); //arms down
        //buttonBoard.button(5).toggleOnTrue(null); balance
 
-    joystick.leftBumper().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldRelative()));
-    joystick.rightBumper().onTrue(new FieldCentricSwitch(drive));
+    //joystick.leftBumper().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldRelative()));
+    
+    joystick.leftBumper().onTrue(new StrafeCommand(drive, () -> -.3));    
+    joystick.rightBumper().onTrue(new StrafeCommand(drive, () -> .3));
+
+    joystick.leftTrigger().onTrue(new RotateCommand(drive, () -> -.3));    
+    joystick.rightTrigger().onTrue(new RotateCommand(drive, () -> .3));
+
+
 
     joystick.a().whileTrue(new AlignBotWithApriltag(drive));
     joystick.y().whileTrue(new FieldCentricSwitch(drive));

@@ -134,9 +134,9 @@ public void setPosition(int position) {
 
       if (FieldOrentedControl) {
 
-         this.setControl(Fielddrive.withVelocityX(-UpDown * MaxSpeed) // Drive forward with
+         this.setControl(Fielddrive.withVelocityX(-LeftRight * MaxSpeed) // Drive forward with
                                                                                            // negative Y (forward)
-            .withVelocityY(-LeftRight * MaxSpeed) // Drive left with negative X (left)
+            .withVelocityY(-UpDown * MaxSpeed) // Drive left with negative X (left)
             .withRotationalRate(-Rotate * MaxAngularRate) // Drive counterclockwise with negative X (left)
             );
 
@@ -148,9 +148,9 @@ public void setPosition(int position) {
     }
 
     public void RobotDrive(double UpDown, double LeftRight, double Rotate) {
-                this.setControl(Botdrive.withVelocityX(-UpDown * MaxSpeed) // Drive forward with
+                this.setControl(Botdrive.withVelocityX(-LeftRight * MaxSpeed) // Drive forward with
                                                                                            // negative Y (forward)
-            .withVelocityY(-LeftRight * MaxSpeed) // Drive left with negative X (left)
+            .withVelocityY(-UpDown * MaxSpeed) // Drive left with negative X (left)
             .withRotationalRate(-Rotate * MaxAngularRate) // Drive counterclockwise with negative X (left)
         );
     }
