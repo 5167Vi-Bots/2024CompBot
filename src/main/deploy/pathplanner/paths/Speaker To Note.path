@@ -1,0 +1,89 @@
+{
+  "version": 1.0,
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 1.4844248215812361,
+        "y": 5.537862667174266
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 2.420401610399422,
+        "y": 6.3763418738238915
+      },
+      "isLocked": false,
+      "linkedName": "SpeakerStop"
+    },
+    {
+      "anchor": {
+        "x": 3.463625739603025,
+        "y": 6.434840423125027
+      },
+      "prevControl": {
+        "x": 2.776405324930156,
+        "y": 6.426459686360725
+      },
+      "nextControl": {
+        "x": 4.263105913385227,
+        "y": 6.444590181341882
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 3.7463687278918525,
+        "y": 5.537862667174266
+      },
+      "prevControl": {
+        "x": 4.9358392303482965,
+        "y": 5.489113876089985
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "NoteStop"
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "eventMarkers": [
+    {
+      "name": "New Event Marker",
+      "waypointRelativePos": 1.15,
+      "command": {
+        "type": "sequential",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "BottomIntakeUp.java"
+              }
+            },
+            {
+              "type": "named",
+              "data": {
+                "name": "TopIntakeUp.java"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "globalConstraints": {
+    "maxVelocity": 2.0,
+    "maxAcceleration": 3.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 179.9999999999998,
+    "rotateFast": false
+  },
+  "reversed": false,
+  "folder": "Auto1",
+  "previewStartingState": null,
+  "useDefaultConstraints": false
+}
