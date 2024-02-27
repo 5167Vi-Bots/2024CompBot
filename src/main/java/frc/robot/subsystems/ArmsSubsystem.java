@@ -26,13 +26,13 @@ public void armsStop(){
   }
 
   public void armsUp(){
-    rightArm.setControl(new DutyCycleOut(-0.1));
-    leftArm.setControl(new DutyCycleOut(0.1));
+    rightArm.setControl(new DutyCycleOut(-0.07));
+    leftArm.setControl(new DutyCycleOut(0.07));
   }
   
   public void armsDown(){
-    rightArm.setControl(new DutyCycleOut(0.1));
-    leftArm.setControl(new DutyCycleOut(-0.1));
+    rightArm.setControl(new DutyCycleOut(0.07));
+    leftArm.setControl(new DutyCycleOut(-0.07));
   }
 
 

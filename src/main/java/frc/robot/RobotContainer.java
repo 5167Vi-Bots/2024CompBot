@@ -114,17 +114,22 @@ public class RobotContainer {
        buttonBoard.button(2).whileTrue(new WarmUp(shooty)); //priming shoot motors
        buttonBoard.button(1).whileTrue(new ShootForward(shooty)); //feeders on, actually fires
 
+
        buttonBoard.button(6).whileTrue(new ArmsUp(arms)); //arms up
        buttonBoard.button(4).whileTrue(new ArmsDown(arms)); //arms down
+       buttonBoard.button(6).whileTrue(new ArmsDown(arms));
+       buttonBoard.button(4).whileTrue(new ArmsUp(arms));
+      // buttonBoard.button(6).whileTrue(new ArmsUp(arms)); //arms up (old)
+       //buttonBoard.button(4).whileTrue(new ArmsDown(arms)); //arms down (old)
        //buttonBoard.button(5).toggleOnTrue(null); balance
 
     //joystick.leftBumper().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldRelative()));
     
-    joystick.leftBumper().onTrue(new StrafeCommand(drive, () -> -.3));    
-    joystick.rightBumper().onTrue(new StrafeCommand(drive, () -> .3));
+    joystick.leftBumper().whileTrue(new StrafeCommand(drive, () -> -.3));    
+    joystick.rightBumper().whileTrue(new StrafeCommand(drive, () -> .3));
 
-    joystick.leftTrigger().onTrue(new RotateCommand(drive, () -> -.3));    
-    joystick.rightTrigger().onTrue(new RotateCommand(drive, () -> .3));
+    joystick.leftTrigger().whileTrue(new RotateCommand(drive, () -> -.3));    
+    joystick.rightTrigger().whileTrue(new RotateCommand(drive, () -> .3));
 
 
 
