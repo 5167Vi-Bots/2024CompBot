@@ -32,6 +32,7 @@ import frc.robot.subsystems.LightsSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
+import edu.wpi.first.wpilibj2.command.button.CommandPS4Controller;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
@@ -54,7 +55,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  * subsystems, commands, and trigger mappings) should be declared here.
  */
 public class RobotContainer {
-  private final CommandXboxController driverController = new CommandXboxController(ControllerPorts.kDriverControllerPort);
+  private final CommandPS4Controller driverController = new CommandPS4Controller(ControllerPorts.kDriverControllerPort);
   private final CommandJoystick buttonBoard = new CommandJoystick(ControllerPorts.kOperatorControllerPort);
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
@@ -73,7 +74,7 @@ public class RobotContainer {
 	
 
   /* Setting up bindings for necessary control of the swerve drive platform */
-  private final CommandXboxController joystick = new CommandXboxController(0); // My joystick
+  private final CommandPS4Controller joystick = new CommandPS4Controller(0); // My joystick
   private final DriveSubsystem drivetrain = TunerConstants.DriveTrain; // My drivetrain
 
   private final Telemetry logger = new Telemetry(drivetrain.MaxSpeed);
@@ -117,24 +118,24 @@ public class RobotContainer {
 
        buttonBoard.button(6).whileTrue(new ArmsUp(arms)); //arms up
        buttonBoard.button(4).whileTrue(new ArmsDown(arms)); //arms down
-       buttonBoard.button(6).whileTrue(new ArmsDown(arms));
-       buttonBoard.button(4).whileTrue(new ArmsUp(arms));
+       //buttonBoard.button(6).whileTrue(new ArmsDown(arms));
+       //buttonBoard.button(4).whileTrue(new ArmsUp(arms));
       // buttonBoard.button(6).whileTrue(new ArmsUp(arms)); //arms up (old)
        //buttonBoard.button(4).whileTrue(new ArmsDown(arms)); //arms down (old)
        //buttonBoard.button(5).toggleOnTrue(null); balance
 
     //joystick.leftBumper().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldRelative()));
     
-    joystick.leftBumper().whileTrue(new StrafeCommand(drive, () -> -.3));    
-    joystick.rightBumper().whileTrue(new StrafeCommand(drive, () -> .3));
+    joystick.L1().whileTrue(new StrafeCommand(drive, () -> -.3));    
+    joystick.R1().whileTrue(new StrafeCommand(drive, () -> .3));
 
-    joystick.leftTrigger().whileTrue(new RotateCommand(drive, () -> -.3));    
-    joystick.rightTrigger().whileTrue(new RotateCommand(drive, () -> .3));
+    joystick.L2().whileTrue(new RotateCommand(drive, () -> -.3));    
+    joystick.R2().whileTrue(new RotateCommand(drive, () -> .3));
 
 
 
-    joystick.a().whileTrue(new AlignBotWithApriltag(drive));
-    joystick.y().whileTrue(new FieldCentricSwitch(drive));
+    joystick.cross().whileTrue(new AlignBotWithApriltag(drive));
+    joystick.triangle().whileTrue(new FieldCentricSwitch(drive));
     drive.setDefaultCommand(new DefaultDrive( drive, () -> joystick.getLeftY(),  () -> joystick.getLeftX(),  () -> joystick.getRightX(), 1));
 
     // drivetrain.setDefaultCommand( // Drivetrain will execute this command periodically
