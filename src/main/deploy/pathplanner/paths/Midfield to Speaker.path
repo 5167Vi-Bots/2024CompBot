@@ -16,38 +16,54 @@
     },
     {
       "anchor": {
-        "x": 8.397003397332211,
-        "y": 5.723108073294532
+        "x": 8.4,
+        "y": 5.72
       },
       "prevControl": {
-        "x": 8.143509683693953,
-        "y": 5.703608556860819
+        "x": 8.354428653205222,
+        "y": 5.71649347596833
+      },
+      "nextControl": {
+        "x": 8.445571346794779,
+        "y": 5.723506524031669
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 6.115559974587884,
+        "y": 6.37634187382389
+      },
+      "prevControl": {
+        "x": 7.314780235261185,
+        "y": 6.980826883268969
       },
       "nextControl": null,
       "isLocked": false,
       "linkedName": null
     }
   ],
-  "rotationTargets": [],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 1.1,
+      "rotationDegrees": 0,
+      "rotateFast": false
+    }
+  ],
   "constraintZones": [],
   "eventMarkers": [
     {
       "name": "New Event Marker",
-      "waypointRelativePos": 0,
+      "waypointRelativePos": 0.5,
       "command": {
-        "type": "sequential",
+        "type": "parallel",
         "data": {
           "commands": [
             {
               "type": "named",
               "data": {
                 "name": "BottomIntakeUp.java"
-              }
-            },
-            {
-              "type": "named",
-              "data": {
-                "name": "TopIntakeUp.java"
               }
             }
           ]
@@ -63,7 +79,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0.0,
+    "rotation": -176.69813432556512,
     "rotateFast": false
   },
   "reversed": false,
