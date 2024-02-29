@@ -38,6 +38,8 @@ import frc.robot.subsystems.ExampleSubsystem;
 
 import com.ctre.phoenix6.Utils;
 import com.ctre.phoenix6.mechanisms.swerve.SwerveRequest;
+import com.pathplanner.lib.auto.NamedCommands;
+import com.pathplanner.lib.commands.PathPlannerAuto;
 import com.ctre.phoenix6.mechanisms.swerve.SwerveModule.DriveRequestType;
 
 import edu.wpi.first.math.geometry.Pose2d;
@@ -82,6 +84,14 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the trigger bindings
     configureBindings();
+    registerPathPlannerCommands();
+  }
+
+  private void registerPathPlannerCommands() {
+
+    NamedCommands.registerCommand("IntakeUp", new IntakeUp(intake));    
+    NamedCommands.registerCommand("WarmUp", new WarmUp(shooty));
+    NamedCommands.registerCommand("Shoot", new ShootForward(shooty));
   }
 
   private final SwerveRequest.RobotCentric robotCentricDrive = new SwerveRequest.RobotCentric()
@@ -161,8 +171,7 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
-  /*public Command getAutonomousCommand() {
-    // An example command will be run in autonomous
-    return BadAuto.BadAuto(m_exampleSubsystem); //help i dont know how to fix this grahggrhiaushdnakwjlnfgilajksfdnkjse,ngaiwlsekj,ndfkajsdfmnaskjdfnasdkjfn
-  }*/
+  public Command getAutonomousCommand() {
+    return new PathPlannerAuto("Auto1");
+  }
 }

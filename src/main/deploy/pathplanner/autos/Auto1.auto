@@ -6,6 +6,12 @@
     "data": {
       "commands": [
         {
+          "type": "named",
+          "data": {
+            "name": "WarmUp"
+          }
+        },
+        {
           "type": "path",
           "data": {
             "pathName": "To Speaker"
@@ -14,13 +20,19 @@
         {
           "type": "named",
           "data": {
-            "name": "ShootForward.java"
+            "name": "Shoot"
           }
         },
         {
           "type": "path",
           "data": {
             "pathName": "Speaker To Note"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "IntakeUp"
           }
         },
         {
@@ -32,13 +44,25 @@
         {
           "type": "named",
           "data": {
-            "name": "ShootForward.java"
+            "name": "WarmUp"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Shoot"
           }
         },
         {
           "type": "path",
           "data": {
             "pathName": "Speaker to Midfield"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "IntakeUp"
           }
         },
         {
