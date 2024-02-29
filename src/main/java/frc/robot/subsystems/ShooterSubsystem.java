@@ -10,7 +10,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
-import com.revrobotics.Rev2mDistanceSensor;
+//import com.revrobotics.Rev2mDistanceSensor;
 
 //Caleb
 import edu.wpi.first.wpilibj2.command.Command;
@@ -19,7 +19,7 @@ import frc.robot.HelperClasses.Constants.ShooterSubsystemConstants;
 
 public class ShooterSubsystem extends SubsystemBase {
   private TalonFX shooter1, shooter2, feeder1, feeder2; 
-  private Rev2mDistanceSensor distanceSensor;
+ // private Rev2mDistanceSensor distanceSensor;
   /** Creates a new ExampletuneSubsystem. */
   public ShooterSubsystem() {
     feeder1 = new TalonFX(ShooterSubsystemConstants.FeederMotor1ID);  
@@ -30,7 +30,7 @@ public class ShooterSubsystem extends SubsystemBase {
     feeder2.setNeutralMode(NeutralModeValue.Coast);
     shooter1.setNeutralMode(NeutralModeValue.Brake);
     shooter2.setNeutralMode(NeutralModeValue.Brake);
-    distanceSensor = null;// new Rev2mDistanceSensor(ShooterSubsystemConstants.distanceSensorPort);
+   // distanceSensor = null;// new Rev2mDistanceSensor(ShooterSubsystemConstants.distanceSensorPort);
   }
 
 

@@ -11,7 +11,7 @@ import edu.wpi.first.math.util.Units;
 //import frc.robot.CommandSwerveDrivetrain;
 
 import com.ctre.phoenix6.mechanisms.swerve.SwerveModuleConstants;
-import com.revrobotics.Rev2mDistanceSensor.Port;
+//import com.revrobotics.Rev2mDistanceSensor.Port;
 
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.util.Color;
@@ -22,9 +22,9 @@ public class Constants {
 
     public static class ArmsSubsystemConstants {
 
-        public static final int LeftArmMotorID = 13;
+        public static final int LeftArmMotorID = 14;
         public static final String LeftArmMotorCan = RioCanBus;
-        public static int RightArmMotorID = 14;
+        public static int RightArmMotorID = 13;
         public static String RightArmMotorCan = RioCanBus;
 
     }
@@ -109,7 +109,7 @@ public class Constants {
         public static final String ShooterMotor1CAN = RioCanBus;
         public static final int ShooterMotor2ID = 12;
         public static final String ShooterMotor2CAN = RioCanBus;
-        public static final Port distanceSensorPort = Port.kMXP;
+        //public static final Port distanceSensorPort = Port.kMXP;
     }
 
     public static class ControllerPorts {

@@ -89,12 +89,12 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
-    LimelightResults llresults =  LimelightHelpers.getLatestResults("limelight-back");
+    //LimelightResults llresults =  LimelightHelpers.getLatestResults("limelight-back");
 
-    Pose2d bc = llresults.targetingResults.getBotPose2d();
+    //Pose2d bc = llresults.targetingResults.getBotPose2d();
     
-    SmartDashboard.putNumber("LL PoseX", bc.getX());
-    SmartDashboard.putNumber("LL PoseY", bc.getY());
+    //SmartDashboard.putNumber("LL PoseX", bc.getX());
+    //SmartDashboard.putNumber("LL PoseY", bc.getY());
 
   }
 

@@ -102,8 +102,8 @@ public class RobotContainer {
    */
   private void configureBindings() {
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
-    new Trigger(m_exampleSubsystem::exampleCondition)
-        .onTrue(new ExampleCommand(m_exampleSubsystem));
+    //new Trigger(m_exampleSubsystem::exampleCondition)
+      //  .onTrue(new ExampleCommand(m_exampleSubsystem));
        buttonBoard.button(11).whileTrue(new IntakeUp(intake)); //intake
        buttonBoard.button(12).toggleOnTrue(Commands.parallel( new ShootBack(shooty), new IntakeDown(intake))); //full out
        buttonBoard.button(3).toggleOnTrue(Commands.parallel(new ShootBack(shooty), new IntakeHold(intake))); //hold
@@ -133,7 +133,7 @@ public class RobotContainer {
     joystick.R2().whileTrue(new RotateCommand(drive, () -> .3));
 
 
-
+    
     joystick.cross().whileTrue(new AlignBotWithApriltag(drive));
     joystick.triangle().whileTrue(new FieldCentricSwitch(drive));
     drive.setDefaultCommand(new DefaultDrive( drive, () -> joystick.getLeftY(),  () -> joystick.getLeftX(),  () -> joystick.getRightX(), 1));
