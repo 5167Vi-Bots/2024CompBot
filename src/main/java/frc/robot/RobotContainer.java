@@ -16,6 +16,7 @@ import frc.robot.commands.DefaultDrive;
 import frc.robot.commands.IntakeDown;
 import frc.robot.commands.IntakeHold;
 import frc.robot.commands.IntakeUp;
+import frc.robot.commands.ResetFieldDriveDirection;
 import frc.robot.commands.RotateCommand;
 import frc.robot.commands.ShootForward;
 import frc.robot.commands.StrafeCommand;
@@ -132,7 +133,7 @@ public class RobotContainer {
        //buttonBoard.button(4).whileTrue(new ArmsUp(arms));
       // buttonBoard.button(6).whileTrue(new ArmsUp(arms)); //arms up (old)
        //buttonBoard.button(4).whileTrue(new ArmsDown(arms)); //arms down (old)
-       //buttonBoard.button(5).toggleOnTrue(null); balance
+       //buttonBoard.button(5).toggleOnTrue(null); bala\nce
 
     //joystick.leftBumper().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldRelative()));
     
@@ -143,7 +144,7 @@ public class RobotContainer {
     joystick.R2().whileTrue(new RotateCommand(drive, () -> .3));
 
 
-    
+    joystick.circle().whileTrue(new ResetFieldDriveDirection(drive));
     joystick.cross().whileTrue(new AlignBotWithApriltag(drive));
     joystick.triangle().whileTrue(new FieldCentricSwitch(drive));
     drive.setDefaultCommand(new DefaultDrive( drive, () -> joystick.getLeftY(),  () -> joystick.getLeftX(),  () -> joystick.getRightX(), 1));
@@ -173,6 +174,6 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    return new PathPlannerAuto("Auto1");
+    return new PathPlannerAuto("parkBlue");
   }
 }
