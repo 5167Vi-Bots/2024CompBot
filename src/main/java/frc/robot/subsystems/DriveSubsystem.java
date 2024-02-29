@@ -198,7 +198,10 @@ public void setPosition(int position) {
             ()->false, // Change this if the path needs to be flipped on red vs blue
             this); // Subsystem for requirements
     }
-
+    public void ResetFieldDirection()
+    {
+      seedFieldRelative();
+    }
 
     public ChassisSpeeds getCurrentRobotChassisSpeeds() {
         return m_kinematics.toChassisSpeeds(getState().ModuleStates);
