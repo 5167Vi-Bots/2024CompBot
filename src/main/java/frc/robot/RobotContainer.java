@@ -11,6 +11,11 @@ import frc.robot.commands.AmpIn;
 import frc.robot.commands.AmpOut;
 import frc.robot.commands.ArmsDown;
 import frc.robot.commands.ArmsUp;
+import frc.robot.commands.AutonIntakeStop;
+import frc.robot.commands.AutonIntakeUp;
+import frc.robot.commands.AutonShootStart;
+import frc.robot.commands.AutonShootStop;
+import frc.robot.commands.AutonWarmUpStart;
 import frc.robot.commands.BadAuto;
 import frc.robot.commands.DefaultDrive;
 import frc.robot.commands.IntakeDown;
@@ -91,9 +96,11 @@ public class RobotContainer {
 
   private void registerPathPlannerCommands() {
 
-    NamedCommands.registerCommand("IntakeUp", new IntakeUp(intake));    
-    NamedCommands.registerCommand("WarmUp", new WarmUp(shooty));
-    NamedCommands.registerCommand("Shoot", new ShootForward(shooty));
+    NamedCommands.registerCommand("IntakeUp", new AutonIntakeUp(intake));
+    NamedCommands.registerCommand("IntakeStop", new AutonIntakeStop(intake));
+    NamedCommands.registerCommand("WarmUp", new AutonWarmUpStart(shooty));
+    NamedCommands.registerCommand("Shoot", new AutonShootStart(shooty));
+    NamedCommands.registerCommand("ShootStop", new AutonShootStop(shooty));
   }
 
   private final SwerveRequest.RobotCentric robotCentricDrive = new SwerveRequest.RobotCentric()
@@ -174,6 +181,6 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    return new PathPlannerAuto("parkBlue");
+    return new PathPlannerAuto("shootAuton");
   }
 }
