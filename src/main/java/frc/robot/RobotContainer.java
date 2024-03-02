@@ -7,6 +7,7 @@ package frc.robot;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.HelperClasses.Constants.ControllerPorts;
 import frc.robot.commands.AlignBotWithApriltag;
+import frc.robot.commands.AlignBotWithColor;
 import frc.robot.commands.AmpIn;
 import frc.robot.commands.AmpOut;
 import frc.robot.commands.ArmsDown;
@@ -52,6 +53,7 @@ import com.ctre.phoenix6.mechanisms.swerve.SwerveModule.DriveRequestType;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -92,6 +94,13 @@ public class RobotContainer {
     // Configure the trigger bindings
     configureBindings();
     registerPathPlannerCommands();
+    registerAutons();
+    
+  }
+
+  private void registerAutons() {
+    //var tab = Shuffleboard.getTab("Auton");
+    //Shuffleboard.
   }
 
   private void registerPathPlannerCommands() {
@@ -149,7 +158,7 @@ public class RobotContainer {
 
     joystick.L2().whileTrue(new RotateCommand(drive, () -> -.3));    
     joystick.R2().whileTrue(new RotateCommand(drive, () -> .3));
-
+    joystick.square().whileTrue(new AlignBotWithColor(drive));
 
     joystick.circle().whileTrue(new ResetFieldDriveDirection(drive));
     joystick.cross().whileTrue(new AlignBotWithApriltag(drive));
