@@ -54,6 +54,7 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -68,7 +69,7 @@ public class RobotContainer {
   private final CommandPS4Controller driverController = new CommandPS4Controller(ControllerPorts.kDriverControllerPort);
   private final CommandJoystick buttonBoard = new CommandJoystick(ControllerPorts.kOperatorControllerPort);
   // The robot's subsystems and commands are defined here...
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
+  //private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
 
   ArmsSubsystem arms = new ArmsSubsystem();
   DriveSubsystem drive = TunerConstants.DriveTrain;
@@ -97,10 +98,21 @@ public class RobotContainer {
     registerAutons();
     
   }
-
+public SendableChooser<String> AutonChooser = new SendableChooser<String>();
   private void registerAutons() {
-    //var tab = Shuffleboard.getTab("Auton");
-    //Shuffleboard.
+    
+    //Create Shuffleboard Tab
+    var tab = Shuffleboard.getTab("Auton");
+
+    //Register Auton modes
+    AutonChooser.addOption("Drive Forward", "DriveForward");
+    AutonChooser.addOption("ShootAuton","shootAuton");
+    
+    //Set the default Auton
+    AutonChooser.setDefaultOption("ShootAuton","shootAuton");
+    
+    //Add to shuffleboard
+    tab.add(AutonChooser);
   }
 
   private void registerPathPlannerCommands() {
@@ -190,6 +202,7 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
+    System.out.println(AutonChooser.getSelected());
     return new PathPlannerAuto("shootAuton");
   }
 }
