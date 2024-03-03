@@ -7,10 +7,16 @@ package frc.robot;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.HelperClasses.Constants.ControllerPorts;
 import frc.robot.commands.AlignBotWithApriltag;
+import frc.robot.commands.AlignBotWithColor;
 import frc.robot.commands.AmpIn;
 import frc.robot.commands.AmpOut;
 import frc.robot.commands.ArmsDown;
 import frc.robot.commands.ArmsUp;
+import frc.robot.commands.AutonIntakeStop;
+import frc.robot.commands.AutonIntakeUp;
+import frc.robot.commands.AutonShootStart;
+import frc.robot.commands.AutonShootStop;
+import frc.robot.commands.AutonWarmUpStart;
 import frc.robot.commands.BadAuto;
 import frc.robot.commands.DefaultDrive;
 import frc.robot.commands.IntakeDown;
@@ -47,6 +53,8 @@ import com.ctre.phoenix6.mechanisms.swerve.SwerveModule.DriveRequestType;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -61,7 +69,7 @@ public class RobotContainer {
   private final CommandPS4Controller driverController = new CommandPS4Controller(ControllerPorts.kDriverControllerPort);
   private final CommandJoystick buttonBoard = new CommandJoystick(ControllerPorts.kOperatorControllerPort);
   // The robot's subsystems and commands are defined here...
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
+  //private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
 
   ArmsSubsystem arms = new ArmsSubsystem();
   DriveSubsystem drive = TunerConstants.DriveTrain;
@@ -87,13 +95,33 @@ public class RobotContainer {
     // Configure the trigger bindings
     configureBindings();
     registerPathPlannerCommands();
+    registerAutons();
+    
+  }
+public SendableChooser<String> AutonChooser = new SendableChooser<String>();
+  private void registerAutons() {
+    
+    //Create Shuffleboard Tab
+    var tab = Shuffleboard.getTab("Auton");
+
+    //Register Auton modes
+    AutonChooser.addOption("Drive Forward", "DriveForward");
+    AutonChooser.addOption("ShootAuton","shootAuton");
+    
+    //Set the default Auton
+    AutonChooser.setDefaultOption("ShootAuton","shootAuton");
+    
+    //Add to shuffleboard
+    tab.add(AutonChooser);
   }
 
   private void registerPathPlannerCommands() {
 
-    NamedCommands.registerCommand("IntakeUp", new IntakeUp(intake));    
-    NamedCommands.registerCommand("WarmUp", new WarmUp(shooty));
-    NamedCommands.registerCommand("Shoot", new ShootForward(shooty));
+    NamedCommands.registerCommand("IntakeUp", new AutonIntakeUp(intake));
+    NamedCommands.registerCommand("IntakeStop", new AutonIntakeStop(intake));
+    NamedCommands.registerCommand("WarmUp", new AutonWarmUpStart(shooty));
+    NamedCommands.registerCommand("Shoot", new AutonShootStart(shooty));
+    NamedCommands.registerCommand("ShootStop", new AutonShootStop(shooty));
   }
 
   private final SwerveRequest.RobotCentric robotCentricDrive = new SwerveRequest.RobotCentric()
@@ -142,7 +170,7 @@ public class RobotContainer {
 
     joystick.L2().whileTrue(new RotateCommand(drive, () -> -.3));    
     joystick.R2().whileTrue(new RotateCommand(drive, () -> .3));
-
+    joystick.square().whileTrue(new AlignBotWithColor(drive));
 
     joystick.circle().whileTrue(new ResetFieldDriveDirection(drive));
     joystick.cross().whileTrue(new AlignBotWithApriltag(drive));
@@ -174,6 +202,7 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    return new PathPlannerAuto("parkBlue");
+    System.out.println(AutonChooser.getSelected());
+    return new PathPlannerAuto("shootAuton");
   }
 }

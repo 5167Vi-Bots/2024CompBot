@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 15.087948580455564,
-        "y": 5.55472336015897
+        "x": 1.6045885083223155,
+        "y": 5.81199475789265
       },
       "prevControl": null,
       "nextControl": {
-        "x": 16.087948580455556,
-        "y": 5.55472336015897
+        "x": 0.6105853807149206,
+        "y": 3.847376811562742
       },
       "isLocked": false,
       "linkedName": "redSpeakerStop"
     },
     {
       "anchor": {
-        "x": 9.322730440332675,
-        "y": 6.747527113287845
+        "x": 8.25856238607064,
+        "y": 0.9589206642800752
       },
       "prevControl": {
-        "x": 8.322730440332675,
-        "y": 6.747527113287845
+        "x": 6.2705561308558515,
+        "y": 0.5028486410249173
       },
       "nextControl": null,
       "isLocked": false,
@@ -43,9 +43,9 @@
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "RedAuto",
+  "folder": null,
   "previewStartingState": {
-    "rotation": 178.2642954110716,
+    "rotation": 0.0,
     "velocity": 0
   },
   "useDefaultConstraints": true

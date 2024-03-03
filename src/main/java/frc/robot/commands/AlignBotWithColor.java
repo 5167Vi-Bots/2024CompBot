@@ -8,9 +8,9 @@ import frc.robot.LimelightHelpers;
 import frc.robot.LimelightHelpers.LimelightResults;
 import frc.robot.subsystems.DriveSubsystem;
 
-public class AlignBotWithApriltag extends Command {
+public class AlignBotWithColor extends Command {
     DriveSubsystem drive;
-    public AlignBotWithApriltag(DriveSubsystem driveSubsystem)
+    public AlignBotWithColor(DriveSubsystem driveSubsystem)
     {
         drive = driveSubsystem;
         addRequirements(drive);
@@ -24,20 +24,20 @@ public class AlignBotWithApriltag extends Command {
 
     @Override
     public void execute() {
-    //LimelightResults llresults =  LimelightHelpers.getLatestResults("limelight-back");
+    //LimelightResults llresults =  LimelightHelpers.getLatestResults("limelight-front");
     
     double kPx = .025;
 
     double kPy = .025;
 
-    /*if (llresults.targetingResults.targets_Fiducials.length > 0)
-    {
-    double xErrorRate=llresults.targetingResults.targets_Fiducials[0].tx; 
-    double yErrorRate=llresults.targetingResults.targets_Fiducials[0].ty;
-System.out.println("xErrorRate: " + xErrorRate);
-System.out.println("yErrorRate: " + yErrorRate);*/
-double xErrorRate = NetworkTableInstance.getDefault().getTable("limelight-back").getEntry("tx").getDouble(0);
+    //if (llresults.targetingResults.targets_Retro.length > 0)
+    //{
+    //double xErrorRate=llresults.targetingResults.targets_Retro[0].tx; 
+    //double yErrorRate=llresults.targetingResults.targets_Retro[0].ty;
+//System.out.println("xErrorRate: " + xErrorRate);
+//System.out.println("yErrorRate: " + yErrorRate);
 
+double xErrorRate = NetworkTableInstance.getDefault().getTable("limelight-front").getEntry("tx").getDouble(0);
 
     drive.MoveRobot(0, -kPx*xErrorRate, 0);
 
