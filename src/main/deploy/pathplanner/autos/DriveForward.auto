@@ -12,9 +12,22 @@
     "data": {
       "commands": [
         {
-          "type": "path",
+          "type": "parallel",
           "data": {
-            "pathName": "DriveForwardPath"
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "DriveForwardPath"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "ShootForward.java"
+                }
+              }
+            ]
           }
         }
       ]

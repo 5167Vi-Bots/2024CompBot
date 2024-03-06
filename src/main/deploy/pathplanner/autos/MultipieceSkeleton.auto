@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 0.4585613729632017,
-      "y": 2.2521941480937606
+      "x": 0.4936438362905214,
+      "y": 7.343928989852282
     },
-    "rotation": 0.0
+    "rotation": 0
   },
   "command": {
     "type": "sequential",
@@ -24,57 +24,15 @@
           }
         },
         {
-          "type": "wait",
-          "data": {
-            "waitTime": 0.5
-          }
-        },
-        {
           "type": "named",
           "data": {
             "name": "Shoot"
           }
         },
         {
-          "type": "wait",
-          "data": {
-            "waitTime": 0.5
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "ShootStop"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 0.3
-          }
-        },
-        {
           "type": "named",
           "data": {
             "name": "IntakeUp"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "speaker to field"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 2.3
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "IntakeStop"
           }
         },
         {
@@ -86,7 +44,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Field To Speaker"
+            "pathName": "NoteGrab1"
           }
         },
         {
@@ -96,15 +54,51 @@
           }
         },
         {
-          "type": "wait",
+          "type": "named",
           "data": {
-            "waitTime": 2.0
+            "name": "IntakeUp"
           }
         },
         {
           "type": "named",
           "data": {
-            "name": "ShootStop"
+            "name": "WarmUp"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "NoteGrab2"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Shoot"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "IntakeUp"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "WarmUp"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "NoteGrab3"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Shoot"
           }
         }
       ]
