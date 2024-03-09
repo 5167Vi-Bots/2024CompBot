@@ -32,7 +32,7 @@ public class IntakeSubsystem extends SubsystemBase {
 
         var tab = Shuffleboard.getTab("Testing");
     tab.addDouble("DistanceSensor", (()->distanceSensor.getRange()));
-  D
+  
 
   
   /**
