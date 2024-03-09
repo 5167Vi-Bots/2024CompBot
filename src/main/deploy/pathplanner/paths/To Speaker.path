@@ -1,0 +1,52 @@
+{
+  "version": 1.0,
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 15.40369075040144,
+        "y": 3.92923589265982
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 14.86575964604921,
+        "y": 4.443778688127182
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 15.087948580455564,
+        "y": 5.55472336015897
+      },
+      "prevControl": {
+        "x": 14.087948580455564,
+        "y": 5.55472336015897
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "redSpeakerStop"
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 3.0,
+    "maxAcceleration": 3.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 180.0,
+    "rotateFast": false
+  },
+  "reversed": false,
+  "folder": "RedAuto",
+  "previewStartingState": {
+    "rotation": -172.010673233603,
+    "velocity": 0
+  },
+  "useDefaultConstraints": true
+}

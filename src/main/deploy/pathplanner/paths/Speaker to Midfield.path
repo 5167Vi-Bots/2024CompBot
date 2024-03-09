@@ -1,0 +1,49 @@
+{
+  "version": 1.0,
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 1.4844248215812361,
+        "y": 5.537862667174266
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 4.2006907945439815,
+        "y": 7.308846526524962
+      },
+      "isLocked": false,
+      "linkedName": "SpeakerStop"
+    },
+    {
+      "anchor": {
+        "x": 7.646272014634292,
+        "y": 5.723108073294532
+      },
+      "prevControl": {
+        "x": 4.711594791360611,
+        "y": 7.419566003027493
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": "MidfieldStop"
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 3.0,
+    "maxAcceleration": 3.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 0,
+    "rotateFast": false
+  },
+  "reversed": false,
+  "folder": "BlueAuto",
+  "previewStartingState": null,
+  "useDefaultConstraints": false
+}
