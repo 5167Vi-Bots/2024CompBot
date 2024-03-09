@@ -14,6 +14,7 @@ import com.ctre.phoenix6.mechanisms.swerve.SwerveModuleConstants;
 //import com.revrobotics.Rev2mDistanceSensor.Port;
 
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.SerialPort.Port;
 import edu.wpi.first.wpilibj.util.Color;
 
 public class Constants {
@@ -109,7 +110,7 @@ public class Constants {
         public static final String ShooterMotor1CAN = RioCanBus;
         public static final int ShooterMotor2ID = 12;
         public static final String ShooterMotor2CAN = RioCanBus;
-        //public static final Port distanceSensorPort = Port.kMXP;
+        public static final com.revrobotics.Rev2mDistanceSensor.Port distanceSensorPort = com.revrobotics.Rev2mDistanceSensor.Port.kOnboard;
     }
 
     public static class ControllerPorts {

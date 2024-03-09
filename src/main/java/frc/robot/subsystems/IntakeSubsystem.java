@@ -10,7 +10,9 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix6.hardware.TalonFX;
 //import com.revrobotics.Rev2mDistanceSensor;
+import com.revrobotics.Rev2mDistanceSensor;
 
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.HelperClasses.Constants.IntakeSubsystemConstants;
@@ -19,15 +21,18 @@ import frc.robot.HelperClasses.Constants.ShooterSubsystemConstants;
 public class IntakeSubsystem extends SubsystemBase {
 /** Creates a new ExampleSubsystem. */
   private TalonFX intake1, intake2;
-  //private Rev2mDistanceSensor distanceSensor;
+  private Rev2mDistanceSensor distanceSensor;
   
   public IntakeSubsystem() {
     intake1 = new TalonFX(IntakeSubsystemConstants.IntakeMotor1ID); //1
     intake2 = new TalonFX(IntakeSubsystemConstants.IntakeMotor2ID); //2
     //intake1.setNeutralMode(NeutralMode.Brake);
     //intake2.setNeutralMode(NeutralMode.Brake);
-    //distanceSensor = new Rev2mDistanceSensor(ShooterSubsystemConstants.distanceSensorPort);
-  }
+    distanceSensor = new Rev2mDistanceSensor(ShooterSubsystemConstants.distanceSensorPort);
+
+        var tab = Shuffleboard.getTab("Testing");
+    tab.addDouble("DistanceSensor", (()->distanceSensor.getRange()));
+  D
 
   
   /**
@@ -88,6 +93,7 @@ public class IntakeSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
+
     // This method will be called once per scheduler run
   }
 
