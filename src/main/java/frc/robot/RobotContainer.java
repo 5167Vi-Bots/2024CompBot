@@ -107,6 +107,7 @@ public SendableChooser<String> AutonChooser = new SendableChooser<String>();
     //Register Auton modes
     AutonChooser.addOption("Drive Forward", "DriveForward");
     AutonChooser.addOption("ShootAuton","shootAuton");
+    AutonChooser.addOption("ShootAutonWait", "shootAutonWait");
     
     //Set the default Auton
     AutonChooser.setDefaultOption("ShootAuton","shootAuton");
@@ -202,7 +203,6 @@ public SendableChooser<String> AutonChooser = new SendableChooser<String>();
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    System.out.println(AutonChooser.getSelected());
-    return new PathPlannerAuto("shootAuton");
+    return new PathPlannerAuto(AutonChooser.getSelected());
   }
 }
