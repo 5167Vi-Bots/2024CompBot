@@ -39,9 +39,18 @@ public class DefaultDrive extends Command {
 
         //Cube Outputs
 
+
         xOut = tmpx*tmpx*tmpx;
         yOut = tmpy*tmpy*tmpy;
         zOut = tmpz*tmpz*tmpz;
+/*
+        xOut = tmpx;
+        yOut = tmpy;
+        zOut = tmpz;
+
+        xOut = tmpx*tmpx*tmpx;
+        yOut = tmpy*tmpy*tmpy;
+        zOut = tmpz*tmpz*tmpz;*/
 
         driveSubsystem.MoveRobot(yOut, xOut, zOut);
     }

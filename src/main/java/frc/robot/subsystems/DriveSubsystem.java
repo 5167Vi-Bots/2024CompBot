@@ -26,7 +26,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpilibj.DriverStation;
 import frc.robot.HelperClasses.Constants;
 
 import frc.robot.generated.TunerConstants;
@@ -120,12 +119,12 @@ public void setPosition(int position) {
   private boolean FieldOrentedControl = true;
 
   private final SwerveRequest.FieldCentric Fielddrive = new SwerveRequest.FieldCentric()
-      .withDeadband(MaxSpeed * 0.05).withRotationalDeadband(MaxAngularRate * 0.05) // Add a 10% deadband
+      .withDeadband(MaxSpeed * 0.1).withRotationalDeadband(MaxAngularRate * 0.1) // Add a 10% deadband
       .withDriveRequestType(DriveRequestType.OpenLoopVoltage); // I want field-centric
                                                                // driving in open loop
 
  private final SwerveRequest.RobotCentric Botdrive = new SwerveRequest.RobotCentric()
-      .withDeadband(MaxSpeed * 0.05).withRotationalDeadband(MaxAngularRate * 0.05) // Add a 10% deadband
+      .withDeadband(MaxSpeed * 0.1).withRotationalDeadband(MaxAngularRate * 0.1) // Add a 10% deadband
       .withDriveRequestType(DriveRequestType.OpenLoopVoltage); // I want field-centric
                                                                // driving in open loop
 
@@ -196,13 +195,7 @@ public void setPosition(int position) {
                                             TunerConstants.kSpeedAt12VoltsMps,
                                             driveBaseRadius,
                                             new ReplanningConfig()),
-            ()->{
-              var alliance = DriverStation.getAlliance();
-             if (alliance.isPresent()){
-              return alliance.get() == DriverStation.Alliance.Red;
-             }
-             return false;
-            }, // Change this if the path needs to be flipped on red vs blue
+            ()->false, // Change this if the path needs to be flipped on red vs blue
             this); // Subsystem for requirements
     }
     public void ResetFieldDirection()

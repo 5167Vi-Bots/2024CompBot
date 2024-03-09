@@ -12,11 +12,6 @@ import frc.robot.commands.AmpIn;
 import frc.robot.commands.AmpOut;
 import frc.robot.commands.ArmsDown;
 import frc.robot.commands.ArmsUp;
-import frc.robot.commands.AutonIntakeStop;
-import frc.robot.commands.AutonIntakeUp;
-import frc.robot.commands.AutonShootStart;
-import frc.robot.commands.AutonShootStop;
-import frc.robot.commands.AutonWarmUpStart;
 import frc.robot.commands.BadAuto;
 import frc.robot.commands.DefaultDrive;
 import frc.robot.commands.IntakeDown;
@@ -118,11 +113,9 @@ public SendableChooser<String> AutonChooser = new SendableChooser<String>();
 
   private void registerPathPlannerCommands() {
 
-    NamedCommands.registerCommand("IntakeUp", new AutonIntakeUp(intake));
-    NamedCommands.registerCommand("IntakeStop", new AutonIntakeStop(intake));
-    NamedCommands.registerCommand("WarmUp", new AutonWarmUpStart(shooty));
-    NamedCommands.registerCommand("Shoot", new AutonShootStart(shooty));
-    NamedCommands.registerCommand("ShootStop", new AutonShootStop(shooty));
+    NamedCommands.registerCommand("IntakeUp", new IntakeUp(intake));    
+    NamedCommands.registerCommand("WarmUp", new WarmUp(shooty));
+    NamedCommands.registerCommand("Shoot", new ShootForward(shooty));
   }
 
   private final SwerveRequest.RobotCentric robotCentricDrive = new SwerveRequest.RobotCentric()
@@ -204,5 +197,6 @@ public SendableChooser<String> AutonChooser = new SendableChooser<String>();
    */
   public Command getAutonomousCommand() {
     return new PathPlannerAuto(AutonChooser.getSelected());
+    //return new PathPlannerAuto("parkBlue");
   }
 }
