@@ -14,7 +14,7 @@ public class NoteLoadedCommand extends BaseLightCommand {
     @Override
       public Color GetColor()
       {
-        return Color.kGreen;
+        return new Color(0,255,0);
       }
 
 }

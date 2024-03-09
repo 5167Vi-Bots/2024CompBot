@@ -33,7 +33,7 @@ public class BaseLightCommand extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_subsystem.setOrange();
+    m_subsystem.setColor(GetColor());
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -42,7 +42,9 @@ public class BaseLightCommand extends Command {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    m_subsystem.setColor(new Color(0,0,0));
+  }
 
   // Returns true when the command should end.
   @Override

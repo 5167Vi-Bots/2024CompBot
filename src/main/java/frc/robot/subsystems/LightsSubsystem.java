@@ -4,6 +4,7 @@
 
 package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.util.Color;
 //Aiden
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -27,6 +28,14 @@ public class LightsSubsystem extends SubsystemBase {
       //double current = DriverStation.getMatchTime();
       //DriverStation.getAlliance();
       candle.setLEDs(toInt(Constants.LightsSubsystemConstants.Orange.red), toInt(Constants.LightsSubsystemConstants.Orange.green), toInt(Constants.LightsSubsystemConstants.Orange.blue));
+    }
+
+
+        public void setColor(Color InColor)
+    {
+      //double current = DriverStation.getMatchTime();
+      //DriverStation.getAlliance();
+      candle.setLEDs(toInt(InColor.red), toInt(InColor.green), toInt(InColor.blue));
     }
     
       /**

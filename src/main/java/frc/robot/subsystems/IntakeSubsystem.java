@@ -29,9 +29,10 @@ public class IntakeSubsystem extends SubsystemBase {
     //intake1.setNeutralMode(NeutralMode.Brake);
     //intake2.setNeutralMode(NeutralMode.Brake);
     distanceSensor = new Rev2mDistanceSensor(ShooterSubsystemConstants.distanceSensorPort);
-
+    distanceSensor.setAutomaticMode(true);
         var tab = Shuffleboard.getTab("Testing");
     tab.addDouble("DistanceSensor", (()->distanceSensor.getRange()));
+    tab.addBoolean("NoteLoaded", (()->ringIn()));
   }
 
   
@@ -54,10 +55,10 @@ public class IntakeSubsystem extends SubsystemBase {
    intake2.set(0);    
   }
 
-  /*public boolean ringIn(){
+  public boolean ringIn(){
     if (distanceSensor == null)
       return false;
-    if (distanceSensor.GetRange() < 100){
+    if (distanceSensor.GetRange() < 5){
       return true;
       //run IntakeUp
     } else {
@@ -65,7 +66,7 @@ public class IntakeSubsystem extends SubsystemBase {
       //run IntakeStop
     }
   }
-  */
+  
 
   /**
    * An example method querying a boolean state of the subsystem (for example, a digital sensor).

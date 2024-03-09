@@ -18,10 +18,12 @@ import frc.robot.commands.AutonShootStart;
 import frc.robot.commands.AutonShootStop;
 import frc.robot.commands.AutonWarmUpStart;
 import frc.robot.commands.BadAuto;
+import frc.robot.commands.BaseLightCommand;
 import frc.robot.commands.DefaultDrive;
 import frc.robot.commands.IntakeDown;
 import frc.robot.commands.IntakeHold;
 import frc.robot.commands.IntakeUp;
+import frc.robot.commands.NoteLoadedCommand;
 import frc.robot.commands.ResetFieldDriveDirection;
 import frc.robot.commands.RotateCommand;
 import frc.robot.commands.ShootForward;
@@ -177,6 +179,11 @@ public SendableChooser<String> AutonChooser = new SendableChooser<String>();
     joystick.triangle().whileTrue(new FieldCentricSwitch(drive));
     drive.setDefaultCommand(new DefaultDrive( drive, () -> joystick.getLeftY(),  () -> joystick.getLeftX(),  () -> joystick.getRightX(), 1));
 
+    Trigger NoteLoadedTrigger = new Trigger(()->intake.ringIn());
+
+    NoteLoadedTrigger.whileTrue(new NoteLoadedCommand(lights));
+
+    lights.setDefaultCommand(new BaseLightCommand(lights));
     // drivetrain.setDefaultCommand( // Drivetrain will execute this command periodically
     // drivetrain.applyRequest(() -> robotCentricDrive.withVelocityX(-joystick.getLeftY() * MaxSpeed) // Drive forward with
     //                                                                                    // negative Y (forward)
