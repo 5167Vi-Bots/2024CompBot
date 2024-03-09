@@ -202,7 +202,7 @@ public SendableChooser<String> AutonChooser = new SendableChooser<String>();
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    System.out.println(AutonChooser.getSelected());
-    return new PathPlannerAuto("shootAuton");
+    //System.out.println(AutonChooser.getSelected());
+    return new PathPlannerAuto(AutonChooser.getSelected());
   }
 }
