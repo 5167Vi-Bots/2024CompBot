@@ -32,23 +32,9 @@ public class IntakeSubsystem extends SubsystemBase {
 
         var tab = Shuffleboard.getTab("Testing");
     tab.addDouble("DistanceSensor", (()->distanceSensor.getRange()));
-  
-
-  
-  /**
-   * Example command factory method.
-   *
-   * @return a command
-   */
-  public Command exampleMethodCommand() {
-    // Inline construction of command goes here.
-    // Subsystem::RunOnce implicitly requires `this` subsystem.
-    return runOnce(
-        () -> {
-          /* one-time action goes here */
-        });
   }
 
+  
   public void intakeUp() {
    intake1.set(-.4);
    intake2.set( -.7);  }
