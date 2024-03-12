@@ -8,6 +8,7 @@ import frc.robot.Constants.OperatorConstants;
 import frc.robot.HelperClasses.Constants.ControllerPorts;
 import frc.robot.commands.AlignBotWithApriltag;
 import frc.robot.commands.AlignBotWithColor;
+import frc.robot.commands.AllianceLightCommand;
 import frc.robot.commands.AmpIn;
 import frc.robot.commands.AmpOut;
 import frc.robot.commands.ArmsDown;
@@ -184,7 +185,7 @@ public SendableChooser<String> AutonChooser = new SendableChooser<String>();
 
     NoteLoadedTrigger.whileTrue(new NoteLoadedCommand(lights));
 
-    lights.setDefaultCommand(new BaseLightCommand(lights));
+    lights.setDefaultCommand(new AllianceLightCommand(lights));
     // drivetrain.setDefaultCommand( // Drivetrain will execute this command periodically
     // drivetrain.applyRequest(() -> robotCentricDrive.withVelocityX(-joystick.getLeftY() * MaxSpeed) // Drive forward with
     //                                                                                    // negative Y (forward)
