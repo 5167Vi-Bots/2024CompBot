@@ -24,21 +24,34 @@
           }
         },
         {
-          "type": "named",
+          "type": "sequential",
           "data": {
-            "name": "Shoot"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "IntakeUp"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "WarmUp"
+            "commands": [
+              {
+                "type": "wait",
+                "data": {
+                  "waitTime": 0.7
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Shoot"
+                }
+              },
+              {
+                "type": "wait",
+                "data": {
+                  "waitTime": 0.5
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "ShootStop"
+                }
+              }
+            ]
           }
         },
         {
@@ -48,21 +61,27 @@
           }
         },
         {
+          "type": "wait",
+          "data": {
+            "waitTime": 0.7
+          }
+        },
+        {
           "type": "named",
           "data": {
             "name": "Shoot"
           }
         },
         {
-          "type": "named",
+          "type": "wait",
           "data": {
-            "name": "IntakeUp"
+            "waitTime": 0.5
           }
         },
         {
           "type": "named",
           "data": {
-            "name": "WarmUp"
+            "name": "ShootStop"
           }
         },
         {
@@ -72,21 +91,27 @@
           }
         },
         {
+          "type": "wait",
+          "data": {
+            "waitTime": 0.7
+          }
+        },
+        {
           "type": "named",
           "data": {
             "name": "Shoot"
           }
         },
         {
-          "type": "named",
+          "type": "wait",
           "data": {
-            "name": "IntakeUp"
+            "waitTime": 0.5
           }
         },
         {
           "type": "named",
           "data": {
-            "name": "WarmUp"
+            "name": "ShootStop"
           }
         },
         {
@@ -96,9 +121,27 @@
           }
         },
         {
+          "type": "wait",
+          "data": {
+            "waitTime": 0.7
+          }
+        },
+        {
           "type": "named",
           "data": {
             "name": "Shoot"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 0.5
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ShootStop"
           }
         }
       ]

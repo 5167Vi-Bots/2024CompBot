@@ -109,6 +109,7 @@ public SendableChooser<String> AutonChooser = new SendableChooser<String>();
     //Register Auton modes
     AutonChooser.addOption("Drive Forward", "DriveForward");
     AutonChooser.addOption("ShootAuton","shootAuton");
+    AutonChooser.addOption("Multipiece", "MultipieceSkeleton");
     
     //Set the default Auton
     AutonChooser.setDefaultOption("ShootAuton","shootAuton");

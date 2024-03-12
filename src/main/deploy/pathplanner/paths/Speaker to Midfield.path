@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.4844248215812361,
-        "y": 5.537862667174266
+        "x": 1.4759528094554764,
+        "y": 5.5430292057165325
       },
       "prevControl": null,
       "nextControl": {
-        "x": 4.2006907945439815,
-        "y": 7.308846526524962
+        "x": 4.192218782418221,
+        "y": 7.314013065067229
       },
       "isLocked": false,
       "linkedName": "SpeakerStop"
@@ -43,7 +43,7 @@
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "BlueAuto",
+  "folder": null,
   "previewStartingState": null,
   "useDefaultConstraints": false
 }
