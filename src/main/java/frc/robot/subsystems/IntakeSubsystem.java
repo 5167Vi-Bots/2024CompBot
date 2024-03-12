@@ -31,7 +31,9 @@ public class IntakeSubsystem extends SubsystemBase {
     distanceSensor = new Rev2mDistanceSensor(ShooterSubsystemConstants.distanceSensorPort);
     distanceSensor.setAutomaticMode(true);
         var tab = Shuffleboard.getTab("Testing");
-    tab.addDouble("DistanceSensor", (()->distanceSensor.getRange()));
+    tab.addDouble("Distance Sensor Value", (()->distanceSensor.getRange()));
+    tab.addBoolean("Distance Sensor Valid", (() -> distanceSensor.isRangeValid()));
+    tab.addBoolean("Distance Sensor Eanbled", (() -> distanceSensor.isEnabled()));
     tab.addBoolean("NoteLoaded", (()->ringIn()));
   }
 
@@ -58,7 +60,12 @@ public class IntakeSubsystem extends SubsystemBase {
   public boolean ringIn(){
     if (distanceSensor == null)
       return false;
-    if (distanceSensor.GetRange() < 5){
+    double range = distanceSensor.getRange();
+
+    if (range < 0) //Distance sensor measurement is invalid
+      return false; 
+      
+    if (range < 5){
       return true;
       //run IntakeUp
     } else {
