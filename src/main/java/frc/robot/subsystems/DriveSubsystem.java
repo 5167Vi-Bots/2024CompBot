@@ -98,7 +98,7 @@ public void setPosition(int position) {
     private final SwerveRequest.SwerveDriveBrake brake = new SwerveRequest.SwerveDriveBrake();
     private final SwerveRequest.PointWheelsAt point = new SwerveRequest.PointWheelsAt();
     public double MaxSpeed = TunerConstants.kSpeedAt12VoltsMps; // kSpeedAt12VoltsMps desired top speed
-            private double MaxAngularRate = 3.5 * Math.PI; // 3/4 of a rotation per second max angular velocity
+            private double MaxAngularRate = 2.75 * Math.PI; // 3/4 of a rotation per second max angular velocity
 //private double MaxAngularRate = 1.5 * Math.PI; // 3/4 of a rotation per second max angular velocity
 
 

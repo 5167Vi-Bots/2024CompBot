@@ -22,8 +22,8 @@ public class ArmsSubsystem extends SubsystemBase {
   rightArm = new TalonFX(ArmsSubsystemConstants.RightArmMotorID);
   leftArm = new TalonFX(ArmsSubsystemConstants.LeftArmMotorID); 
   //reset the encoders to 0 on initialization
-  leftBottom = -125; //wherever it ends up
-  rightBottom = 125;
+  leftBottom = -130; //wherever it ends up
+  rightBottom = 130;
   leftTop = 0;
   rightTop = 0;
   }
@@ -45,7 +45,7 @@ public void armsStop(){
 
   public void leftArmDown()
   {
-    leftArm.setControl(new DutyCycleOut(.5));
+    leftArm.setControl(new DutyCycleOut(-.5));
   }
     public void rightArmDown()
   {
