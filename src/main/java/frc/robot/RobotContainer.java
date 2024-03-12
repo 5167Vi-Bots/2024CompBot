@@ -24,8 +24,10 @@ import frc.robot.commands.DefaultDrive;
 import frc.robot.commands.IntakeDown;
 import frc.robot.commands.IntakeHold;
 import frc.robot.commands.IntakeUp;
+import frc.robot.commands.LeftArmDown;
 import frc.robot.commands.NoteLoadedCommand;
 import frc.robot.commands.ResetFieldDriveDirection;
+import frc.robot.commands.RightArmDown;
 import frc.robot.commands.RotateCommand;
 import frc.robot.commands.ShootForward;
 import frc.robot.commands.StrafeCommand;
@@ -147,6 +149,10 @@ public SendableChooser<String> AutonChooser = new SendableChooser<String>();
 
        buttonBoard.button(6).whileTrue(new ArmsUp(arms)); //arms up
        buttonBoard.button(4).whileTrue(new ArmsDown(arms)); //arms down
+
+       buttonBoard.button(9).whileTrue(new LeftArmDown(arms));      
+        buttonBoard.button(10).whileTrue(new RightArmDown(arms));
+
        //buttonBoard.button(6).whileTrue(new ArmsDown(arms));
        //buttonBoard.button(4).whileTrue(new ArmsUp(arms));
       // buttonBoard.button(6).whileTrue(new ArmsUp(arms)); //arms up (old)

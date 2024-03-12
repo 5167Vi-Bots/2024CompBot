@@ -43,7 +43,24 @@ public void armsStop(){
     leftArm.setControl(new PositionDutyCycle(leftBottom)); //make it negative?
   }
 
+  public void leftArmDown()
+  {
+    leftArm.setControl(new DutyCycleOut(.5));
+  }
+    public void rightArmDown()
+  {
+    rightArm.setControl(new DutyCycleOut(.5));
+  }
 
+  public void leftStop()
+  {
+        leftArm.setControl(new DutyCycleOut(0));
+  }
+    public void rightStop()
+  {
+        rightArm.setControl(new DutyCycleOut(0));
+
+  }
   /**
    * Example command factory method.
    *
