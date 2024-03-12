@@ -69,7 +69,6 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  * subsystems, commands, and trigger mappings) should be declared here.
  */
 public class RobotContainer {
-  private final CommandPS4Controller driverController = new CommandPS4Controller(ControllerPorts.kDriverControllerPort);
   private final CommandJoystick buttonBoard = new CommandJoystick(ControllerPorts.kOperatorControllerPort);
   // The robot's subsystems and commands are defined here...
   //private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
@@ -80,10 +79,6 @@ public class RobotContainer {
   ShooterSubsystem shooty = new ShooterSubsystem();
   AmpSubsystem amp = new AmpSubsystem();
   IntakeSubsystem intake = new IntakeSubsystem();
-
-  // Replace with CommandPS4Controller or CommandJoystick if needed
-  public double MaxSpeed = TunerConstants.kSpeedAt12VoltsMps; // kSpeedAt12VoltsMps desired top speed
-  private double MaxAngularRate = 1.5 * Math.PI; // 3/4 of a rotation per second max angular velocity
 
 	
 
@@ -128,12 +123,6 @@ public SendableChooser<String> AutonChooser = new SendableChooser<String>();
     NamedCommands.registerCommand("ShootStop", new AutonShootStop(shooty));
   }
 
-  private final SwerveRequest.RobotCentric robotCentricDrive = new SwerveRequest.RobotCentric()
-  .withDeadband(MaxSpeed * 0.1).withRotationalDeadband(MaxAngularRate * 0.1) // Add a 10% deadband
-  .withDriveRequestType(DriveRequestType.OpenLoopVoltage); // I want field-centric
-                                                           // driving in open loop
-
-
   /**
    * Use this method to define your trigger->command mappings. Triggers can be created via the
    * {@link Trigger#Trigger(java.util.function.BooleanSupplier)} constructor with an arbitrary
@@ -144,9 +133,6 @@ public SendableChooser<String> AutonChooser = new SendableChooser<String>();
    * joysticks}.
    */
   private void configureBindings() {
-    // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
-    //new Trigger(m_exampleSubsystem::exampleCondition)
-      //  .onTrue(new ExampleCommand(m_exampleSubsystem));
        buttonBoard.button(11).whileTrue(new IntakeUp(intake)); //intake
        buttonBoard.button(12).toggleOnTrue(Commands.parallel( new ShootBack(shooty), new IntakeDown(intake))); //full out
        buttonBoard.button(3).toggleOnTrue(Commands.parallel(new ShootBack(shooty), new IntakeHold(intake))); //hold
@@ -186,14 +172,6 @@ public SendableChooser<String> AutonChooser = new SendableChooser<String>();
     NoteLoadedTrigger.whileTrue(new NoteLoadedCommand(lights));
 
     lights.setDefaultCommand(new AllianceLightCommand(lights));
-    // drivetrain.setDefaultCommand( // Drivetrain will execute this command periodically
-    // drivetrain.applyRequest(() -> robotCentricDrive.withVelocityX(-joystick.getLeftY() * MaxSpeed) // Drive forward with
-    //                                                                                    // negative Y (forward)
-    //     .withVelocityY(-joystick.getLeftX() * MaxSpeed) // Drive left with negative X (left)
-    //     //.withRotationalRate(0) // Drive counterclockwise with negative X (left)
-    //     .withRotationalRate(-joystick.getRightX() * MaxAngularRate) // Drive counterclockwise with negative X (left)
-
-    // ));
 
 
 
@@ -211,7 +189,6 @@ public SendableChooser<String> AutonChooser = new SendableChooser<String>();
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    //System.out.println(AutonChooser.getSelected());
     return new PathPlannerAuto(AutonChooser.getSelected());
   }
 }
