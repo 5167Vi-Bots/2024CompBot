@@ -58,6 +58,8 @@ import com.ctre.phoenix6.mechanisms.swerve.SwerveModule.DriveRequestType;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -96,7 +98,12 @@ public class RobotContainer {
     configureBindings();
     registerPathPlannerCommands();
     registerAutons();
+    configureGeneralTelemetry();
     
+  }
+private void configureGeneralTelemetry() {
+  Shuffleboard.getTab("Testing").addDouble("Battery Voltage", (()-> RobotController.getBatteryVoltage()));
+  
   }
 public SendableChooser<String> AutonChooser = new SendableChooser<String>();
   private void registerAutons() {
