@@ -6,6 +6,8 @@ package frc.robot.commands;
 
 import frc.robot.HelperClasses.Constants.LightsSubsystemConstants;
 import frc.robot.subsystems.LightsSubsystem;
+
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.Command;
 
@@ -13,7 +15,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 public class BaseLightCommand extends Command {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final LightsSubsystem m_subsystem;
-  private Color setColor = LightsSubsystemConstants.Orange;
+  
 
   public Color GetColor()
   {
@@ -38,7 +40,27 @@ public class BaseLightCommand extends Command {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    Color ColorToUse = GetColor(); 
+
+      Double TimeLeft = DriverStation.getMatchTime();
+
+      int TimeLeftInt = TimeLeft.intValue();
+
+      if (TimeLeftInt <= 0 || TimeLeftInt > 30) //Time is greater than 30 or less than or equal to 0, meaning we dont need to blink
+      {        
+        m_subsystem.setColor(ColorToUse);
+        return;
+      }
+      
+      //Blinking Code. Just blink every second. If we want faster blinking times, 
+      //we will need to work something else out here
+
+      if (TimeLeftInt % 2 == 0)
+        m_subsystem.setColor(Color.kBlack);
+      else
+        m_subsystem.setColor(ColorToUse);
+  }
 
   // Called once the command ends or is interrupted.
   @Override
