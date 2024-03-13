@@ -62,6 +62,11 @@ public class ShooterSubsystem extends SubsystemBase {
     feeder2.set(-.2);
   }
 
+  public void shootBackAuton(){
+    shooter1.set(-.2);
+    shooter2.set(-.2);
+  }
+
   public void warmUp(){
     shooter1.set(1);
     shooter2.set(1);

@@ -13,8 +13,10 @@ import frc.robot.commands.AmpIn;
 import frc.robot.commands.AmpOut;
 import frc.robot.commands.ArmsDown;
 import frc.robot.commands.ArmsUp;
+import frc.robot.commands.AutonIntakeHold;
 import frc.robot.commands.AutonIntakeStop;
 import frc.robot.commands.AutonIntakeUp;
+import frc.robot.commands.AutonShootBack;
 import frc.robot.commands.AutonShootStart;
 import frc.robot.commands.AutonShootStop;
 import frc.robot.commands.AutonWarmUpStart;
@@ -117,7 +119,7 @@ public SendableChooser<String> AutonChooser = new SendableChooser<String>();
     AutonChooser.addOption("Multipiece", "MultipieceSkeleton");
     
     //Set the default Auton
-    AutonChooser.setDefaultOption("ShootAuton","shootAuton");
+    AutonChooser.setDefaultOption("Multipiece","MultipieceSkeleton");
     
     //Add to shuffleboard
     tab.add(AutonChooser);
@@ -130,6 +132,7 @@ public SendableChooser<String> AutonChooser = new SendableChooser<String>();
     NamedCommands.registerCommand("WarmUp", new AutonWarmUpStart(shooty));
     NamedCommands.registerCommand("Shoot", new AutonShootStart(shooty));
     NamedCommands.registerCommand("ShootStop", new AutonShootStop(shooty));
+    NamedCommands.registerCommand("Hold",(Commands.parallel(new AutonShootBack(shooty), new AutonIntakeUp(intake))));
   }
 
   /**
