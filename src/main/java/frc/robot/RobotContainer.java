@@ -53,6 +53,7 @@ import frc.robot.subsystems.ExampleSubsystem;
 
 import com.ctre.phoenix6.Utils;
 import com.ctre.phoenix6.mechanisms.swerve.SwerveRequest;
+import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 import com.pathplanner.lib.commands.PathPlannerAuto;
 import com.ctre.phoenix6.mechanisms.swerve.SwerveModule.DriveRequestType;
@@ -107,22 +108,26 @@ private void configureGeneralTelemetry() {
   Shuffleboard.getTab("Testing").addDouble("Battery Voltage", (()-> RobotController.getBatteryVoltage()));
   
   }
-public SendableChooser<String> AutonChooser = new SendableChooser<String>();
+//public SendableChooser<String> AutonChooser = new SendableChooser<String>();
+public SendableChooser<Command> AutonChooser = new SendableChooser<Command>();
+
   private void registerAutons() {
     
     //Create Shuffleboard Tab
     var tab = Shuffleboard.getTab("Auton");
 
     //Register Auton modes
-    AutonChooser.addOption("Drive Forward", "DriveForward");
-    AutonChooser.addOption("ShootAuton","shootAuton");
-    AutonChooser.addOption("Multipiece", "MultipieceSkeleton");
+    //AutonChooser.addOption("Drive Forward", "DriveForward");
+    //AutonChooser.addOption("ShootAuton","shootAuton");
+    //AutonChooser.addOption("Multipiece", "MultipieceSkeleton");
     
     //Set the default Auton
-    AutonChooser.setDefaultOption("Multipiece","MultipieceSkeleton");
+    //AutonChooser.setDefaultOption("Multipiece","MultipieceSkeleton");
     
     //Add to shuffleboard
-    tab.add(AutonChooser);
+    //tab.add(AutonChooser);    
+    tab.add(AutoBuilder.buildAutoChooser());
+
   }
 
   private void registerPathPlannerCommands() {
@@ -205,6 +210,6 @@ public SendableChooser<String> AutonChooser = new SendableChooser<String>();
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    return new PathPlannerAuto(AutonChooser.getSelected());
+    return AutonChooser.getSelected();
   }
 }
