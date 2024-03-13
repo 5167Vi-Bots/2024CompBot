@@ -13,6 +13,7 @@ import frc.robot.commands.AmpIn;
 import frc.robot.commands.AmpOut;
 import frc.robot.commands.ArmsDown;
 import frc.robot.commands.ArmsUp;
+import frc.robot.commands.AutonAlignBotWithColor;
 import frc.robot.commands.AutonIntakeHold;
 import frc.robot.commands.AutonIntakeStop;
 import frc.robot.commands.AutonIntakeUp;
@@ -137,7 +138,9 @@ public SendableChooser<Command> AutonChooser = new SendableChooser<Command>();
     NamedCommands.registerCommand("WarmUp", new AutonWarmUpStart(shooty));
     NamedCommands.registerCommand("Shoot", new AutonShootStart(shooty));
     NamedCommands.registerCommand("ShootStop", new AutonShootStop(shooty));
-    NamedCommands.registerCommand("Hold",(Commands.parallel(new AutonShootBack(shooty), new AutonIntakeUp(intake))));
+    NamedCommands.registerCommand("Hold",(Commands.parallel(new AutonShootBack(shooty), new AutonIntakeUp(intake))));   
+    NamedCommands.registerCommand("NoteAlign",new AutonAlignBotWithColor(drive) );
+
   }
 
   /**
@@ -166,7 +169,9 @@ public SendableChooser<Command> AutonChooser = new SendableChooser<Command>();
        buttonBoard.button(4).whileTrue(new ArmsDown(arms)); //arms down
 
        buttonBoard.button(9).whileTrue(new LeftArmDown(arms));      
-        buttonBoard.button(10).whileTrue(new RightArmDown(arms));
+       buttonBoard.button(10).whileTrue(new RightArmDown(arms));
+
+       buttonBoard.button(5).whileTrue(new AutonAlignBotWithColor(drive));
 
        //buttonBoard.button(6).whileTrue(new ArmsDown(arms));
        //buttonBoard.button(4).whileTrue(new ArmsUp(arms));
