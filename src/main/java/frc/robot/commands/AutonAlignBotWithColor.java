@@ -39,7 +39,7 @@ public class AutonAlignBotWithColor extends Command {
 
 double xErrorRate = NetworkTableInstance.getDefault().getTable("limelight-front").getEntry("tx").getDouble(0);
 
-    drive.RobotDrive(0, 0 ,-kPx*xErrorRate);
+    drive.RobotDrive(0, 0 ,kPx*xErrorRate);
 
     //Pose2d bc = llresults.targetingResults.getBotPose2d();
     

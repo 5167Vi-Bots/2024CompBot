@@ -109,8 +109,8 @@ private void configureGeneralTelemetry() {
   Shuffleboard.getTab("Testing").addDouble("Battery Voltage", (()-> RobotController.getBatteryVoltage()));
   
   }
-//public SendableChooser<String> AutonChooser = new SendableChooser<String>();
-public SendableChooser<Command> AutonChooser = new SendableChooser<Command>();
+public SendableChooser<String> AutonChooser = new SendableChooser<String>();
+//public SendableChooser<Command> AutonChooser = new SendableChooser<Command>();
 
   private void registerAutons() {
     
@@ -118,16 +118,16 @@ public SendableChooser<Command> AutonChooser = new SendableChooser<Command>();
     var tab = Shuffleboard.getTab("Auton");
 
     //Register Auton modes
-    //AutonChooser.addOption("Drive Forward", "DriveForward");
-    //AutonChooser.addOption("ShootAuton","shootAuton");
-    //AutonChooser.addOption("Multipiece", "MultipieceSkeleton");
+    AutonChooser.addOption("Drive Forward", "DriveForward");
+    AutonChooser.addOption("ShootAuton","shootAuton");
+    AutonChooser.addOption("Multipiece", "MultipieceSkeleton");
     
     //Set the default Auton
-    //AutonChooser.setDefaultOption("Multipiece","MultipieceSkeleton");
+    AutonChooser.setDefaultOption("Multipiece","MultipieceSkeleton");
     
     //Add to shuffleboard
-    //tab.add(AutonChooser);    
-    tab.add(AutoBuilder.buildAutoChooser());
+    tab.add(AutonChooser);    
+    //tab.add(AutoBuilder.buildAutoChooser());
 
   }
 
@@ -139,7 +139,7 @@ public SendableChooser<Command> AutonChooser = new SendableChooser<Command>();
     NamedCommands.registerCommand("Shoot", new AutonShootStart(shooty));
     NamedCommands.registerCommand("ShootStop", new AutonShootStop(shooty));
     NamedCommands.registerCommand("Hold",(Commands.parallel(new AutonShootBack(shooty), new AutonIntakeUp(intake))));   
-    NamedCommands.registerCommand("NoteAlign",new AutonAlignBotWithColor(drive) );
+    NamedCommands.registerCommand("NoteAlign",new AutonAlignBotWithColor(drive));
 
   }
 
@@ -215,6 +215,6 @@ public SendableChooser<Command> AutonChooser = new SendableChooser<Command>();
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    return AutonChooser.getSelected();
+    return new PathPlannerAuto(AutonChooser.getSelected());
   }
 }
