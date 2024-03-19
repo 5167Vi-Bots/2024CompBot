@@ -12,9 +12,12 @@ import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 //import com.revrobotics.Rev2mDistanceSensor;
 
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 //Caleb
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.RobotContainer;
+import frc.robot.HelperClasses.MotorTelemetry;
 import frc.robot.HelperClasses.Constants.ShooterSubsystemConstants;
 
 public class ShooterSubsystem extends SubsystemBase {
@@ -30,8 +33,20 @@ public class ShooterSubsystem extends SubsystemBase {
     feeder2.setNeutralMode(NeutralModeValue.Coast);
     shooter1.setNeutralMode(NeutralModeValue.Brake);
     shooter2.setNeutralMode(NeutralModeValue.Brake);
+
+    SetupTelemetry();
    // distanceSensor = null;// new Rev2mDistanceSensor(ShooterSubsystemConstants.distanceSensorPort);
   }
+
+
+  private void SetupTelemetry() {
+    var SBTab = Shuffleboard.getTab("ShooterSubsystem");
+
+    MotorTelemetry.AddMotorTelemetry(SBTab, "Shooter 1", shooter1);    
+    MotorTelemetry.AddMotorTelemetry(SBTab, "Shooter 2", shooter2);
+    MotorTelemetry.AddMotorTelemetry(SBTab, "Feeder 1", feeder1);
+    MotorTelemetry.AddMotorTelemetry(SBTab, "Feeder 2", feeder2);
+   }
 
 
   /**
@@ -114,7 +129,8 @@ public class ShooterSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-  }
+    //shooter1.get
+ }
 
   @Override
   public void simulationPeriodic() {

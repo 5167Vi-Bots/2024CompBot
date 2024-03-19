@@ -6,6 +6,7 @@ package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.HelperClasses.Constants.ControllerPorts;
+import frc.robot.HelperClasses.MotorTelemetry;
 import frc.robot.commands.AlignBotWithApriltag;
 import frc.robot.commands.AlignBotWithColor;
 import frc.robot.commands.AllianceLightCommand;
@@ -52,6 +53,11 @@ import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
 
+import java.util.function.BooleanSupplier;
+import java.util.function.DoubleSupplier;
+import java.util.function.IntSupplier;
+import java.util.function.LongSupplier;
+
 import com.ctre.phoenix6.Utils;
 import com.ctre.phoenix6.mechanisms.swerve.SwerveRequest;
 import com.pathplanner.lib.auto.AutoBuilder;
@@ -65,6 +71,7 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -107,8 +114,124 @@ public class RobotContainer {
   }
 private void configureGeneralTelemetry() {
   Shuffleboard.getTab("Testing").addDouble("Battery Voltage", (()-> RobotController.getBatteryVoltage()));
+
+  /*
+  var DriveTab = Shuffleboard.getTab("DriveSubsystem");
+
+    MotorTelemetry.AddMotorTelemetry(DriveTab, "Module 1", drive.getModule(0));    
+    MotorTelemetry.AddMotorTelemetry(DriveTab, "Module 2", drive.getModule(1));
+    MotorTelemetry.AddMotorTelemetry(DriveTab, "Module 3", drive.getModule(2));    
+    MotorTelemetry.AddMotorTelemetry(DriveTab, "Module 4", drive.getModule(3));  
+*/
+
+    var DSTab = Shuffleboard.getTab("DriverStation");
+
+    DSTab.addString("Event Name", (()-> DriverStation.getEventName()));
+    DSTab.addInteger("Match Number", (() -> DriverStation.getMatchNumber()));
+    DSTab.addString("Match Type", (() -> DriverStation.getMatchType().toString()));
+    DSTab.addString("Alliance", (() -> DriverStation.getAlliance().toString()));
+    DSTab.addString("Location", (() -> DriverStation.getLocation().toString()));
+    DSTab.addString("Game Specific Message", (()-> DriverStation.getGameSpecificMessage()));
+    DSTab.addBoolean("Is Teleop", (() -> DriverStation.isTeleop()));
+    DSTab.addBoolean("Teleop Enabled", (() -> DriverStation.isTeleopEnabled()));
+    DSTab.addBoolean("Is Auton", (() -> DriverStation.isAutonomous()));
+    DSTab.addBoolean("Auton Enabled", (() -> DriverStation.isAutonomousEnabled()));
+    DSTab.addBoolean("Is Disabled", (() -> DriverStation.isDisabled()));
+    DSTab.addBoolean("Is EStopped", (() -> DriverStation.isEStopped()));
+    DSTab.addBoolean("Is Enabled", (() -> DriverStation.isEnabled()));
+    DSTab.addBoolean("FMS Attached", (() -> DriverStation.isFMSAttached()));
+    DSTab.addBoolean("Driver station Attached", (() -> DriverStation.isDSAttached()));
+    
+    SetupControllerTelemetry(DSTab, 0); 
+    SetupControllerTelemetry(DSTab, 1);
+    SetupControllerTelemetry(DSTab, 2);
+    SetupControllerTelemetry(DSTab, 3);
+    SetupControllerTelemetry(DSTab, 4);
+    SetupControllerTelemetry(DSTab, 5);
+
+
+
   
   }
+
+  public void SetupControllerTelemetry(ShuffleboardTab tab, int ControllerID)
+  {
+    String prefix = "Controller " + ControllerID + " ";
+    tab.addBoolean(prefix + "Is Connected", (() -> DriverStation.isJoystickConnected(ControllerID)));
+
+    if (!DriverStation.isJoystickConnected(ControllerID))
+      return;
+
+    int LoopCount = DriverStation.getStickButtonCount(ControllerID);
+    String LoopPrefix = prefix + "Button ";
+    int i = -1;
+    for (i = 0; i <= LoopCount; i++)
+    {
+      tab.addBoolean(LoopPrefix + i + " Pressed", new StickButtonSupplier(ControllerID, i).Supplier);
+    }
+
+    LoopCount = DriverStation.getStickAxisCount(ControllerID);
+    LoopPrefix = prefix + "Axis ";
+    for (i = 0; i <= LoopCount; i++)
+    {
+      tab.addDouble(LoopPrefix + i + " Axis Value", new StickAxisSupplier(ControllerID, i).Supplier);
+    }
+
+    LoopCount = DriverStation.getStickPOVCount(ControllerID);
+    LoopPrefix = prefix + "POV ";
+    for (i = 0; i <= LoopCount; i++)
+    {
+      tab.addInteger(LoopPrefix + i + " Value", new StickPOVSupplier(ControllerID, i).Supplier);
+    }
+    
+    
+  }
+
+  private class StickButtonSupplier
+  {
+    private int id = -1;     
+    private int ctrlid = -1; 
+
+    public StickButtonSupplier (int ControllerID, int newid)
+    {
+      id = newid;
+      ctrlid = ControllerID;
+    }
+
+    public BooleanSupplier Supplier = (() -> DriverStation.getStickButton(ctrlid, id));
+  }
+
+    private class StickAxisSupplier
+  {
+    private int id = -1;     
+    private int ctrlid = -1; 
+
+    public StickAxisSupplier (int ControllerID, int newid)
+    {
+      id = newid;
+      ctrlid = ControllerID;
+    }
+
+    public DoubleSupplier Supplier = (() -> DriverStation.getStickAxis(ctrlid, id));
+  }
+
+
+  private class StickPOVSupplier
+  {
+    private int id = -1;     
+    private int ctrlid = -1; 
+
+    public StickPOVSupplier (int ControllerID, int newid)
+    {
+      id = newid;
+      ctrlid = ControllerID;
+    }
+
+    public LongSupplier Supplier = (() -> DriverStation.getStickPOV(ctrlid, id));
+  }
+
+
+
 public SendableChooser<String> AutonChooser = new SendableChooser<String>();
 //public SendableChooser<Command> AutonChooser = new SendableChooser<Command>();
 

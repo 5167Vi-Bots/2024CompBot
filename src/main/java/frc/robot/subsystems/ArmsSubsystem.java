@@ -8,11 +8,13 @@ import com.ctre.phoenix6.controls.DutyCycleOut;
 import com.ctre.phoenix6.controls.PositionDutyCycle;
 import com.ctre.phoenix6.hardware.TalonFX;
 
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 //Erin
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.HelperClasses.Constants.ArmsSubsystemConstants;
+import frc.robot.HelperClasses.MotorTelemetry;
 
 public class ArmsSubsystem extends SubsystemBase { 
   private TalonFX rightArm, leftArm;
@@ -26,7 +28,16 @@ public class ArmsSubsystem extends SubsystemBase {
   rightBottom = 130;
   leftTop = 0;
   rightTop = 0;
+  SetupTelemetry();
   }
+
+    private void SetupTelemetry() {
+    var SBTab = Shuffleboard.getTab("ArmSubsystem");
+
+        MotorTelemetry.AddMotorTelemetry(SBTab, "Left Arm", leftArm);    
+    MotorTelemetry.AddMotorTelemetry(SBTab, "Right Arm", rightArm);
+ 
+   }
 
 public void armsStop(){
    leftArm.setControl(new DutyCycleOut(0)); //lock it in to where is currently is??

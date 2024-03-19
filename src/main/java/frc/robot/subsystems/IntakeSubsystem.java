@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.HelperClasses.Constants.IntakeSubsystemConstants;
 import frc.robot.HelperClasses.Constants.ShooterSubsystemConstants;
+import frc.robot.HelperClasses.MotorTelemetry;
 
 public class IntakeSubsystem extends SubsystemBase {
 /** Creates a new ExampleSubsystem. */
@@ -35,9 +36,20 @@ public class IntakeSubsystem extends SubsystemBase {
     tab.addBoolean("Distance Sensor Valid", (() -> distanceSensor.isRangeValid()));
     tab.addBoolean("Distance Sensor Eanbled", (() -> distanceSensor.isEnabled()));
     tab.addBoolean("NoteLoaded", (()->ringIn()));
+
+    SetupTelemetry();
+
   }
 
-  
+      private void SetupTelemetry() {
+    var SBTab = Shuffleboard.getTab("IntakeSubsystem");
+
+    MotorTelemetry.AddMotorTelemetry(SBTab, "Intake 1", intake1);    
+    MotorTelemetry.AddMotorTelemetry(SBTab, "Intake 2", intake2);
+
+
+   }
+
   public void intakeUp() {
    intake1.set(-.4);
    intake2.set( -.7);  }
